@@ -8,6 +8,11 @@ export default function About() {
       color: "bg-orange-100 border-orange-300",
     },
     {
+      name: "Python",
+      logo: "https://unpkg.com/simple-icons@latest/icons/python.svg",
+      color: "bg-blue-100 border-blue-300",
+    },
+    {
       name: "MongoDB",
       logo: "https://cdn.simpleicons.org/mongodb/47A248",
       color: "bg-green-100 border-green-300",

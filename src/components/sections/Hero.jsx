@@ -6,7 +6,7 @@ export default function HeroSection() {
   const roles = ["Cloud Engineer", "Full-Stack Developer", "DevOps Enthusiast"];
   const [particles, setParticles] = useState([]);
 
-  // Create floating particles for depth
+  /* Create floating particles for depth
   useEffect(() => {
     const particleArray = [];
     const colors = ["#4285f4", "#9333ea", "#ec4899"];
@@ -24,7 +24,7 @@ export default function HeroSection() {
       });
     }
     setParticles(particleArray);
-  }, []);
+  }, []);*/
 
   // Animate particles slowly
   useEffect(() => {
@@ -79,28 +79,26 @@ export default function HeroSection() {
   return (
     <section className="relative h-screen overflow-hidden flex items-center bg-white">
       {/* Smooth animated gradient background */}
-      <div className="absolute inset-0 opacity-40">
-        <div
-          className="absolute top-20 -left-20 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl"
-          style={{
-            animation: "floatSlow 20s ease-in-out infinite",
-          }}
-        ></div>
-        <div
-          className="absolute top-40 right-10 w-80 h-80 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl"
-          style={{
-            animation: "floatSlow 25s ease-in-out infinite",
-            animationDelay: "5s",
-          }}
-        ></div>
-        <div
-          className="absolute -bottom-20 left-1/3 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl"
-          style={{
-            animation: "floatSlow 30s ease-in-out infinite",
-            animationDelay: "10s",
-          }}
-        ></div>
-      </div>
+      <div
+        className="absolute top-20 -left-20 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl"
+        style={{
+          animation: "floatSlow 8s ease-in-out infinite",
+        }}
+      ></div>
+      <div
+        className="absolute top-40 right-10 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl"
+        style={{
+          animation: "floatSlow 8s ease-in-out infinite",
+          animationDelay: "5s",
+        }}
+      ></div>
+      <div
+        className="absolute -bottom-20 left-1/3 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl"
+        style={{
+          animation: "floatSlow 6s ease-in-out infinite",
+          animationDelay: "10s",
+        }}
+      ></div>
 
       {/* Subtle floating particles */}
       <div
