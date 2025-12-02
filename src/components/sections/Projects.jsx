@@ -27,7 +27,7 @@ export default function Projects() {
   ];
 
   return (
-    <section className="relative py-20 bg-white overflow-hidden">
+    <section className="relative py-20 bg-white overflow-hidden ">
       {/* Background gradient */}
       <div
         className="absolute inset-0"
@@ -37,9 +37,10 @@ export default function Projects() {
         }}
       ></div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
+          {" "}
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
               Featured Projects

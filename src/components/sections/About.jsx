@@ -85,9 +85,9 @@ export default function About() {
   ];
 
   return (
-    <section className="relative py-16 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden">
+    <section className="relative py-16 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden ">
       {/* Animated gradient orbs */}
-      <div className="absolute inset-0 opacity-30">
+      <div className="absolute inset-0 opacity-20">
         <div
           className="absolute top-0 left-0 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl"
           style={{
@@ -276,7 +276,7 @@ export default function About() {
         </div>
 
         {/* Animated Tech Stack Scroll */}
-        <div className="mt-16">
+        <div className="mt-58">
           <h3 className="text-2xl font-bold text-center text-gray-900 mb-8">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
               Technologies I Work With

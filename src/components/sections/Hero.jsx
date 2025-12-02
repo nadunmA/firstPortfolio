@@ -80,20 +80,20 @@ export default function HeroSection() {
     <section className="relative h-screen overflow-hidden flex items-center bg-white">
       {/* Smooth animated gradient background */}
       <div
-        className="absolute top-20 -left-20 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl"
+        className="absolute top-20 -left-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl"
         style={{
           animation: "floatSlow 8s ease-in-out infinite",
         }}
       ></div>
       <div
-        className="absolute top-40 right-10 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl"
+        className="absolute top-40 right-10 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl"
         style={{
           animation: "floatSlow 8s ease-in-out infinite",
           animationDelay: "5s",
         }}
       ></div>
       <div
-        className="absolute -bottom-20 left-1/3 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl"
+        className="absolute -bottom-20 left-1/3 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl"
         style={{
           animation: "floatSlow 6s ease-in-out infinite",
           animationDelay: "10s",
