@@ -1,6 +1,84 @@
 import React from "react";
 
 export default function About() {
+  const technologies = [
+    {
+      name: "AWS",
+      logo: "https://cdn.simpleicons.org/amazonaws/FF9900",
+      color: "bg-orange-100 border-orange-300",
+    },
+    {
+      name: "MongoDB",
+      logo: "https://cdn.simpleicons.org/mongodb/47A248",
+      color: "bg-green-100 border-green-300",
+    },
+    {
+      name: "Express.js",
+      logo: "https://cdn.simpleicons.org/express/000000",
+      color: "bg-gray-100 border-gray-300",
+    },
+    {
+      name: "React",
+      logo: "https://cdn.simpleicons.org/react/61DAFB",
+      color: "bg-blue-100 border-blue-300",
+    },
+    {
+      name: "Node.js",
+      logo: "https://cdn.simpleicons.org/nodedotjs/339933",
+      color: "bg-green-100 border-green-300",
+    },
+    {
+      name: "Docker",
+      logo: "https://cdn.simpleicons.org/docker/2496ED",
+      color: "bg-blue-100 border-blue-300",
+    },
+    {
+      name: "Kubernetes",
+      logo: "https://cdn.simpleicons.org/kubernetes/326CE5",
+      color: "bg-blue-100 border-blue-300",
+    },
+    {
+      name: "Nginx",
+      logo: "https://cdn.simpleicons.org/nginx/009639",
+      color: "bg-green-100 border-green-300",
+    },
+    {
+      name: "Jenkins",
+      logo: "https://cdn.simpleicons.org/jenkins/D24939",
+      color: "bg-red-100 border-red-300",
+    },
+    {
+      name: "Terraform",
+      logo: "https://cdn.simpleicons.org/terraform/7B42BC",
+      color: "bg-purple-100 border-purple-300",
+    },
+    {
+      name: "Grafana",
+      logo: "https://cdn.simpleicons.org/grafana/F46800",
+      color: "bg-orange-100 border-orange-300",
+    },
+    {
+      name: "Git",
+      logo: "https://cdn.simpleicons.org/git/F05032",
+      color: "bg-orange-100 border-orange-300",
+    },
+    {
+      name: "Linux",
+      logo: "https://cdn.simpleicons.org/linux/FCC624",
+      color: "bg-yellow-100 border-yellow-300",
+    },
+    {
+      name: "SonarQube",
+      logo: "https://cdn.simpleicons.org/sonarqube/4E9BCD",
+      color: "bg-blue-100 border-blue-300",
+    },
+    {
+      name: "Cloudflare",
+      logo: "https://cdn.simpleicons.org/cloudflare/F38020",
+      color: "bg-orange-100 border-orange-300",
+    },
+  ];
+
   return (
     <section className="relative py-16 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden">
       {/* Animated gradient orbs */}
@@ -189,35 +267,57 @@ export default function About() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
-            {/* Tech Stack */}
-            <div className="mt-8">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
-                Technologies I Work With
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-4 py-2 bg-green-100 text-green-700 rounded-lg text-sm font-semibold border border-green-300">
-                  MongoDB
-                </span>
-                <span className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-semibold border border-gray-300">
-                  Express.js
-                </span>
-                <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg text-sm font-semibold border border-blue-300">
-                  React
-                </span>
-                <span className="px-4 py-2 bg-green-100 text-green-700 rounded-lg text-sm font-semibold border border-green-300">
-                  Node.js
-                </span>
-                <span className="px-4 py-2 bg-orange-100 text-orange-700 rounded-lg text-sm font-semibold border border-orange-300">
-                  AWS
-                </span>
-                <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg text-sm font-semibold border border-blue-300">
-                  Docker
-                </span>
-                <span className="px-4 py-2 bg-purple-100 text-purple-700 rounded-lg text-sm font-semibold border border-purple-300">
-                  Git
-                </span>
-              </div>
+        {/* Animated Tech Stack Scroll */}
+        <div className="mt-16">
+          <h3 className="text-2xl font-bold text-center text-gray-900 mb-8">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
+              Technologies I Work With
+            </span>
+          </h3>
+
+          <div className="relative overflow-hidden py-8">
+            {/* Gradient overlays */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-pink-50 to-transparent z-10"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-blue-50 to-transparent z-10"></div>
+
+            {/* Scrolling container */}
+            <div className="flex animate-scroll">
+              {/* First set of technologies */}
+              {technologies.map((tech, index) => (
+                <div
+                  key={`tech-1-${index}`}
+                  className={`flex-shrink-0 mx-3 px-6 py-4 ${tech.color} rounded-2xl border-2 flex items-center space-x-3 shadow-md hover:scale-110 transition-transform duration-300`}
+                >
+                  <img
+                    src={tech.logo}
+                    alt={tech.name}
+                    className="w-10 h-10 object-contain"
+                  />
+                  <span className="text-gray-800 font-semibold whitespace-nowrap">
+                    {tech.name}
+                  </span>
+                </div>
+              ))}
+
+              {/* Duplicate set for seamless loop */}
+              {technologies.map((tech, index) => (
+                <div
+                  key={`tech-2-${index}`}
+                  className={`flex-shrink-0 mx-3 px-6 py-4 ${tech.color} rounded-2xl border-2 flex items-center space-x-3 shadow-md hover:scale-110 transition-transform duration-300`}
+                >
+                  <img
+                    src={tech.logo}
+                    alt={tech.name}
+                    className="w-10 h-10 object-contain"
+                  />
+                  <span className="text-gray-800 font-semibold whitespace-nowrap">
+                    {tech.name}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -237,6 +337,23 @@ export default function About() {
           75% {
             transform: translate(20px, 30px) scale(1.05);
           }
+        }
+        
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll {
+          animation: scroll 10s linear infinite;
+        }
+        
+        .animate-scroll:hover {
+          animation-play-state: paused;
         }
       `}</style>
     </section>
