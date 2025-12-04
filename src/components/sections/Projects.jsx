@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import solomonImg from "../../Images/solomon.png";
 import busTricky from "../../Images/bus.png";
 
@@ -38,9 +39,15 @@ export default function Projects() {
       ></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        {/* Section Header */}
-        <div className="text-center mb-20">
-          {" "}
+        {/* Section Header - Fades Down */}
+
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-20"
+        >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
               Featured Projects
@@ -50,17 +57,21 @@ export default function Projects() {
             A showcase of my work in full-stack development, cloud
             infrastructure, and DevOps automation
           </p>
-        </div>
+        </motion.div>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <div
+          {projects.map((project, index) => (
+            <motion.div
               key={project.id}
-              className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }} // Replays animation every scroll
+              transition={{ duration: 0.5, delay: index * 0.2 }} // Staggered delay based on index
+              className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 h-full flex flex-col"
             >
               {/* Project Image */}
-              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
+              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50 flex-shrink-0">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -70,16 +81,16 @@ export default function Projects() {
               </div>
 
               {/* Project Content */}
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">
                   {project.description}
                 </p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag, index) => (
                     <span
                       key={index}
@@ -91,7 +102,7 @@ export default function Projects() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex gap-3">
+                <div className="flex gap-3 mt-auto">
                   {/* Live Demo Button */}
                   <a
                     href={project.liveDemo}
@@ -133,12 +144,18 @@ export default function Projects() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* View More Button */}
-        <div className="text-center mt-12">
+        {/* View More Button - Fades Up */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-center mt-12"
+        >
           <a
             href="https://github.com/nadunalgoda"
             target="_blank"
@@ -150,7 +167,7 @@ export default function Projects() {
             </svg>
             View All Projects on GitHub
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -5,6 +5,8 @@ export default function HeroSection() {
   const [currentRole, setCurrentRole] = useState(0);
   const roles = ["Cloud Engineer", "Full-Stack Developer", "DevOps Enthusiast"];
   const [particles, setParticles] = useState([]);
+  const [scrollY, setScrollY] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   /* Create floating particles for depth
   useEffect(() => {
@@ -25,6 +27,28 @@ export default function HeroSection() {
     }
     setParticles(particleArray);
   }, []);*/
+
+  // Handle scroll for parallax effects
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Handle mouse movement for interactive tilt effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   // Animate particles slowly
   useEffect(() => {
@@ -80,23 +104,29 @@ export default function HeroSection() {
     <section className="relative h-screen overflow-hidden flex items-center bg-white">
       {/* Smooth animated gradient background */}
       <div
-        className="absolute top-20 -left-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl"
+        className="absolute top-20 -left-20 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl"
         style={{
           animation: "floatSlow 8s ease-in-out infinite",
+          transform: `translate(${scrollY * 0.15}px, ${scrollY * 0.1}px)`,
+          transition: "transform 0.1s ease-out",
         }}
       ></div>
       <div
-        className="absolute top-40 right-10 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl"
+        className="absolute top-40 right-10 w-80 h-80 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl"
         style={{
           animation: "floatSlow 8s ease-in-out infinite",
           animationDelay: "5s",
+          transform: `translate(${scrollY * -0.1}px, ${scrollY * 0.2}px)`,
+          transition: "transform 0.1s ease-out",
         }}
       ></div>
       <div
-        className="absolute -bottom-20 left-1/3 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl"
+        className="absolute -bottom-20 left-1/3 w-96 h-96 bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl"
         style={{
           animation: "floatSlow 6s ease-in-out infinite",
           animationDelay: "10s",
+          transform: `translate(${scrollY * 0.05}px, ${scrollY * 0.15}px)`,
+          transition: "transform 0.1s ease-out",
         }}
       ></div>
 
@@ -123,7 +153,18 @@ export default function HeroSection() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center -mt-16">
+      <div
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center -mt-16"
+        style={{
+          transform: `translateY(${
+            scrollY * 0.5
+          }px) perspective(1000px) rotateY(${mousePosition.x * 2}deg) rotateX(${
+            mousePosition.y * -2
+          }deg)`,
+          opacity: Math.max(0, 1 - scrollY / 500),
+          transition: "transform 0.2s ease-out",
+        }}
+      >
         <div className="grid md:grid-cols-2 gap-8 items-center w-full">
           {/* Left Content */}
           <div className="text-gray-900 space-y-4">
@@ -295,7 +336,15 @@ export default function HeroSection() {
           </div>
 
           {/* Right Stats Card */}
-          <div className="relative hidden md:block">
+          <div
+            className="relative hidden md:block"
+            style={{
+              transform: `translateZ(50px) rotateY(${
+                mousePosition.x * 5
+              }deg) rotateX(${mousePosition.y * -5}deg)`,
+              transition: "transform 0.3s ease-out",
+            }}
+          >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur-3xl opacity-20"></div>
               <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-6 border border-gray-200 shadow-2xl">

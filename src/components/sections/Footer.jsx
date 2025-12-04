@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -64,8 +65,14 @@ export default function Footer() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-4 gap-8 mb-8">
-          {/* Brand Section */}
-          <div className="md:col-span-2">
+          {/* Brand Section - Fades Up */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5 }}
+            className="md:col-span-2"
+          >
             <h3 className="text-2xl font-bold mb-4">
               <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
                 Nadun Algoda
@@ -80,10 +87,15 @@ export default function Footer() {
               SLIIT while exploring the world of cloud computing and modern web
               technologies.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Quick Links */}
-          <div>
+          {/* Quick Links - Staggered Fade */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <h4 className="text-lg font-semibold mb-4 text-gray-900">
               Quick Links
             </h4>
@@ -100,25 +112,34 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Connect Section */}
-          <div>
+          {/* Connect Section - Icons Pop In */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
             <h4 className="text-lg font-semibold mb-4 text-gray-900">
               Connect
             </h4>
             <div className="flex flex-wrap gap-3">
-              {socialLinks.map((social) => (
-                <a
+              {socialLinks.map((social, index) => (
+                <motion.a
                   key={social.name}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
                   className="p-3 bg-white border border-gray-200 rounded-lg hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-lg"
                   title={social.name}
                 >
                   {social.icon}
-                </a>
+                </motion.a>
               ))}
             </div>
             <div className="mt-6">
@@ -130,24 +151,36 @@ export default function Footer() {
                 nadun@example.com
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Divider */}
         <div className="border-t border-gray-200 my-8"></div>
 
-        {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        {/* Bottom Section - Copyright */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
+        >
           <div className="text-gray-600 text-sm text-center md:text-left">
             <p>
               © {currentYear} Nadun Algoda. All rights reserved. Built with{" "}
               <span className="text-red-500">♥</span> using React & Tailwind CSS
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Back to Top Button */}
-        <div className="text-center mt-12">
+        {/* Back to Top Button - Bounces Up */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ type: "spring", stiffness: 100, delay: 0.8 }}
+          className="text-center mt-12"
+        >
           <a
             href="#top"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-semibold text-base hover:bg-gray-800 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
@@ -167,7 +200,7 @@ export default function Footer() {
             </svg>
             Back to Top
           </a>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
