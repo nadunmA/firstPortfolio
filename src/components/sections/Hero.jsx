@@ -58,30 +58,30 @@ export default function HeroSection() {
           <div className="space-y-6">
             {/* Welcome Text */}
             <motion.div
-              className="mb-4"
+              className="mb-16"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false }}
               custom={0}
               variants={fadeInUp}
             >
-              <p className="text-sm md:text-base text-gray-400 font-medium tracking-wide uppercase">
+              {/*  <p className="text-sm md:text-base text-gray-400 font-medium tracking-wide uppercase">
                 Welcome to my portfolio
-              </p>
+              </p> */}
             </motion.div>
 
             {/* Main Heading */}
             <motion.h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+              className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false }}
               custom={1}
               variants={fadeInUp}
             >
-              Experience liftoff
+              Deploying future-ready solutions,
               <br />
-              <span className="text-white">with Nadun Algoda</span>
+              <span className="text-white">one build at a time.</span>
             </motion.h1>
 
             {/* Typing Animation & Description */}
@@ -223,7 +223,7 @@ export default function HeroSection() {
               custom={5}
               variants={fadeInUp}
             >
-              {/* Icons content... (කලින් තිබ්බ code එකමයි) */}
+              {/* Icons content*/}
               <a
                 href="https://github.com/nadunalgoda"
                 target="_blank"
@@ -275,9 +275,9 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Scroll Indicator - මෙකත් animate කරමු */}
+        {/* Scroll Indicator*/}
         <motion.div
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20"
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}

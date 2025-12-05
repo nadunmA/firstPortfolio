@@ -196,7 +196,7 @@ export default function About() {
 
                 {/* Badges */}
                 <div className="flex flex-wrap justify-center gap-3">
-                  {["MERN Stack", "Cloud Computing", "DevOps"].map(
+                  {["MERN Stack", "Cloud Engineering", "DevOps"].map(
                     (badge, i) => (
                       <span
                         key={i}
@@ -250,7 +250,7 @@ export default function About() {
                     My journey in software development has sparked a strong
                     interest in{" "}
                     <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600">
-                      Cloud Computing
+                      Cloud Engineering
                     </span>
                     . I'm actively expanding my skills in cloud technologies and
                     DevOps practices, aiming to become proficient in designing
@@ -264,17 +264,17 @@ export default function About() {
             <div className="grid grid-cols-3 gap-4">
               {[
                 {
-                  num: "15+",
+                  num: "3+",
                   label: "Projects",
                   gradient: "from-blue-600 to-cyan-600",
                 },
                 {
-                  num: "5+",
+                  num: "10+",
                   label: "Technologies",
                   gradient: "from-purple-600 to-pink-600",
                 },
                 {
-                  num: "2+",
+                  num: "1+",
                   label: "Years",
                   gradient: "from-orange-600 to-red-600",
                 },
@@ -301,7 +301,7 @@ export default function About() {
         </div>
 
         {/* Highlight Cards*/}
-        <div className="grid md:grid-cols-3 gap-6 mb-20">
+        <div className="grid md:grid-cols-3 gap-6 mb-46">
           {highlights.map((item, i) => (
             <motion.div
               key={i}

@@ -161,8 +161,7 @@ export default function Footer() {
                     </span>
                   </h3>
                   <p className="text-gray-700 font-semibold mb-3">
-                    Full-Stack Developer | Cloud Enthusiast | DevOps
-                    Practitioner
+                    Full-Stack Developer | Cloud Enthusiast | DevOps Enthusiast
                   </p>
                   <p className="text-gray-600 text-sm leading-relaxed">
                     Passionate about building scalable applications and
