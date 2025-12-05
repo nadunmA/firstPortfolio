@@ -1,85 +1,23 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import aws from "../../Images/aws.png"; // aws image eka import karala thiyenawa.
 
 export default function Certifications() {
   const [selectedCert, setSelectedCert] = useState(null);
+  // New state to control the visibility of the certificate image modal
+  const [isCertificateViewOpen, setIsCertificateViewOpen] = useState(false);
 
   const certifications = [
     {
       id: 1,
-      title: "AWS Certified Solutions Architect",
+      title: "Amazon Q Developer",
       issuer: "Amazon Web Services",
-      date: "December 2024",
+      date: "November 2025",
       credentialId: "AWS-12345",
       icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
       gradient: "from-orange-400 to-red-400",
       skills: ["Cloud Architecture", "AWS Services", "Security", "Scalability"],
-      logo: "https://cdn.simpleicons.org/amazonaws/FF9900",
-    },
-    {
-      id: 2,
-      title: "MongoDB Certified Developer",
-      issuer: "MongoDB University",
-      date: "October 2024",
-      credentialId: "MONGO-67890",
-      icon: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4",
-      gradient: "from-green-400 to-emerald-400",
-      skills: ["NoSQL", "Database Design", "Aggregation", "Performance"],
-      logo: "https://cdn.simpleicons.org/mongodb/47A248",
-    },
-    {
-      id: 3,
-      title: "Docker Certified Associate",
-      issuer: "Docker Inc.",
-      date: "September 2024",
-      credentialId: "DOCKER-24680",
-      icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4",
-      gradient: "from-blue-400 to-cyan-400",
-      skills: ["Containerization", "Docker Compose", "Networking", "Volumes"],
-      logo: "https://cdn.simpleicons.org/docker/2496ED",
-    },
-    {
-      id: 4,
-      title: "Kubernetes Administrator (CKA)",
-      issuer: "The Linux Foundation",
-      date: "August 2024",
-      credentialId: "K8S-13579",
-      icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z",
-      gradient: "from-purple-400 to-pink-400",
-      skills: [
-        "Orchestration",
-        "Cluster Management",
-        "Deployments",
-        "Services",
-      ],
-      logo: "https://cdn.simpleicons.org/kubernetes/326CE5",
-    },
-    {
-      id: 5,
-      title: "React Developer Certification",
-      issuer: "Meta",
-      date: "July 2024",
-      credentialId: "REACT-97531",
-      icon: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
-      gradient: "from-cyan-400 to-blue-400",
-      skills: [
-        "React Hooks",
-        "Component Design",
-        "State Management",
-        "Performance",
-      ],
-      logo: "https://cdn.simpleicons.org/react/61DAFB",
-    },
-    {
-      id: 6,
-      title: "Jenkins Certified Engineer",
-      issuer: "CloudBees",
-      date: "June 2024",
-      credentialId: "JENKINS-86420",
-      icon: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15",
-      gradient: "from-red-400 to-orange-400",
-      skills: ["CI/CD", "Pipeline", "Automation", "Integration"],
-      logo: "https://cdn.simpleicons.org/jenkins/D24939",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
     },
   ];
 
@@ -94,6 +32,12 @@ export default function Certifications() {
         ease: "easeOut",
       },
     }),
+  };
+
+  // Function to handle opening the certificate image view
+  const handleViewCertificate = (e) => {
+    e.stopPropagation();
+    setIsCertificateViewOpen(true);
   };
 
   return (
@@ -236,13 +180,16 @@ export default function Certifications() {
           ))}
         </div>
 
-        {/* Modal */}
+        {/* Modal (Certificate Details) */}
         {selectedCert && (
           <motion.div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            onClick={() => setSelectedCert(null)}
+            onClick={() => {
+              setSelectedCert(null);
+              setIsCertificateViewOpen(false); // Close image view too if main modal is closed
+            }}
           >
             <motion.div
               className="relative max-w-2xl w-full"
@@ -340,7 +287,11 @@ export default function Certifications() {
 
                   {/* Actions */}
                   <div className="flex gap-3">
-                    <button className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                    {/* MODIFICATION: Added onClick to open the certificate image view */}
+                    <button
+                      onClick={handleViewCertificate}
+                      className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                    >
                       View Certificate
                     </button>
                     <button className="flex-1 px-6 py-3 bg-white/60 backdrop-blur-xl border border-white/80 text-gray-700 rounded-xl font-medium shadow-lg hover:bg-white/80 hover:scale-105 transition-all duration-300">
@@ -353,6 +304,55 @@ export default function Certifications() {
           </motion.div>
         )}
       </div>
+
+      {/* New Certificate Image View Modal */}
+      {isCertificateViewOpen && selectedCert && (
+        <motion.div
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          onClick={() => setIsCertificateViewOpen(false)}
+        >
+          <motion.div
+            className="relative max-w-4xl w-full h-auto max-h-[90vh]"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative bg-white rounded-xl shadow-2xl p-4 sm:p-6 overflow-auto max-h-[90vh]">
+              {/* Close Button */}
+              <button
+                onClick={() => setIsCertificateViewOpen(false)}
+                className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all"
+              >
+                <svg
+                  className="w-5 h-5 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
+              {/* Certificate Image */}
+              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+                {selectedCert.title} - Full Certificate
+              </h3>
+              <img
+                src={aws} // Displaying the imported 'aws' image
+                alt={`${selectedCert.title} Certificate`}
+                className="w-full h-auto object-contain rounded-lg"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
 
       <style>{`
         @keyframes blob {
