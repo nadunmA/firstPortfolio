@@ -15,10 +15,9 @@
     "url": "https://github.com/nadunmA"
   },
   "sameAs": [
-  "https://github.com/nadunmA",
-  "https://www.linkedin.com/in/nadunal21/"
-
-],
+    "https://github.com/nadunmA",
+    "https://www.linkedin.com/in/nadunal21/"
+  ],
   "keywords": [
     "portfolio",
     "full-stack-developer",
@@ -36,13 +35,14 @@
     "sri-lanka"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "deploy": "npm run build && echo 'Ready to deploy!'",
-    "analyze": "vite build --mode analyze"
-  },
+  "dev": "vite",
+  "build": "vite build",
+  "lint": "eslint .",
+  "preview": "vite preview",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist",
+  "analyze": "vite build --mode analyze"
+},
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
     "framer-motion": "^12.23.25",
@@ -62,6 +62,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
+    "gh-pages": "^6.3.0",
     "globals": "^16.5.0",
     "vite": "^7.2.4"
   },
