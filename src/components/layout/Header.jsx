@@ -68,7 +68,7 @@ export default function Navbar() {
                 <a
                   href="#home"
                   onClick={() => handleNavClick("home")}
-                  className="text-lg font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text hover:scale-105 transition-transform duration-300 drop-shadow-sm"
+                  className="text-lg font-bold bg-white text-transparent bg-clip-text hover:scale-105 transition-transform duration-300 drop-shadow-sm"
                 >
                   Nadun Algoda
                 </a>
@@ -89,7 +89,7 @@ export default function Navbar() {
                     className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
                       activeSection === item.id
                         ? "bg-black/80 text-white shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-xl"
-                        : "text-gray-700 hover:text-black hover:bg-black/10 hover:shadow-[inset_0_1px_0_rgba(0,0,0,0.1)]"
+                        : "text-white hover:text-black hover:bg-black/10 hover:shadow-[inset_0_1px_0_rgba(0,0,0,0.1)]"
                     }`}
                   >
                     {item.name}
@@ -162,7 +162,6 @@ export default function Navbar() {
       </motion.nav>
 
       {/* Spacer */}
-      <div className="pt-20"></div>
     </>
   );
 }

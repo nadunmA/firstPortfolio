@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; // 1. Framer Motion import කරන්න
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -60,148 +60,263 @@ export default function Footer() {
     { name: "Contact", href: "#contact" },
   ];
 
+  // 2. Animation Variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (custom) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, delay: custom * 0.1, ease: "easeOut" },
+    }),
+  };
+
+  const popIn = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: (custom) => ({
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        delay: custom * 0.1,
+        type: "spring",
+        stiffness: 100,
+      },
+    }),
+  };
+
   return (
-    <footer className="relative bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 text-gray-900 overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 overflow-hidden">
+      {/* Animated Liquid Background - (Static) */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div className="absolute top-20 -right-40 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-40 left-1/3 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      </div>
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-4 gap-8 mb-8">
-          {/* Brand Section - Fades Up */}
+          {/* Brand Section */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5 }}
             className="md:col-span-2"
-          >
-            <h3 className="text-2xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
-                Nadun Algoda
-              </span>
-            </h3>
-            <p className="text-gray-600 mb-4 max-w-md">
-              Full-Stack Developer | Cloud Enthusiast | DevOps Practitioner
-            </p>
-            <p className="text-gray-600 text-sm leading-relaxed max-w-md">
-              Passionate about building scalable applications and automating
-              infrastructure. Currently pursuing my undergraduate degree at
-              SLIIT while exploring the world of cloud computing and modern web
-              technologies.
-            </p>
-          </motion.div>
-
-          {/* Quick Links - Staggered Fade */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            custom={0}
+            variants={fadeInUp}
           >
-            <h4 className="text-lg font-semibold mb-4 text-gray-900">
-              Quick Links
-            </h4>
-            <ul className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 hover:text-black transition-colors duration-300 flex items-center space-x-2 group"
-                  >
-                    <span className="w-0 group-hover:w-2 h-px bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"></span>
-                    <span>{link.name}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Connect Section - Icons Pop In */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <h4 className="text-lg font-semibold mb-4 text-gray-900">
-              Connect
-            </h4>
-            <div className="flex flex-wrap gap-3">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-                  className="p-3 bg-white border border-gray-200 rounded-lg hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-lg"
-                  title={social.name}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
+            {/* Glass Card */}
+            <div className="relative">
+              <div className="absolute -inset-[1px] rounded-2xl">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white via-blue-100/50 to-purple-100/50"></div>
+              </div>
+              <div className="relative bg-white/60 backdrop-blur-3xl border border-white rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)]">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-2xl"></div>
+                <div className="relative">
+                  <h3 className="text-2xl font-bold mb-4">
+                    <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
+                      Nadun Algoda
+                    </span>
+                  </h3>
+                  <p className="text-gray-700 font-semibold mb-3">
+                    Full-Stack Developer | Cloud Enthusiast | DevOps
+                    Practitioner
+                  </p>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Passionate about building scalable applications and
+                    automating infrastructure. Currently pursuing my
+                    undergraduate degree at SLIIT while exploring the world of
+                    cloud computing and modern web technologies.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="mt-6">
-              <p className="text-gray-600 text-sm mb-2">Get in touch:</p>
-              <a
-                href="mailto:nadun@example.com"
-                className="text-blue-400 hover:text-blue-300 transition-colors duration-300"
-              >
-                nadun@example.com
-              </a>
+          </motion.div>
+
+          {/* Quick Links */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            custom={2}
+            variants={fadeInUp}
+          >
+            <div className="relative">
+              <div className="absolute -inset-[1px] rounded-2xl">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white via-blue-100/50 to-purple-100/50"></div>
+              </div>
+              <div className="relative bg-white/60 backdrop-blur-3xl border border-white rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] h-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-2xl"></div>
+                <div className="relative">
+                  <h4 className="text-lg font-semibold mb-4 text-gray-900">
+                    Quick Links
+                  </h4>
+                  <ul className="space-y-3">
+                    {quickLinks.map((link) => (
+                      <li key={link.name}>
+                        <a
+                          href={link.href}
+                          className="text-gray-600 hover:text-gray-900 transition-colors duration-300 flex items-center space-x-2 group"
+                        >
+                          <span className="w-0 group-hover:w-2 h-px bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300"></span>
+                          <span className="font-medium">{link.name}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Connect Section */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            custom={3}
+            variants={fadeInUp}
+          >
+            <div className="relative">
+              <div className="absolute -inset-[1px] rounded-2xl">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white via-blue-100/50 to-purple-100/50"></div>
+              </div>
+              <div className="relative bg-white/60 backdrop-blur-3xl border border-white rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] h-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-2xl"></div>
+                <div className="relative">
+                  <h4 className="text-lg font-semibold mb-4 text-gray-900">
+                    Connect
+                  </h4>
+                  <div className="flex flex-wrap gap-3 mb-6">
+                    {socialLinks.map((social, index) => (
+                      <motion.a
+                        key={social.name}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative group"
+                        title={social.name}
+                        custom={index + 4} // Icons ටික එකින් එක එන්න
+                        variants={popIn}
+                      >
+                        <div className="absolute -inset-[1px] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-400 to-purple-400"></div>
+                        </div>
+                        <div className="relative p-3 bg-white/70 backdrop-blur-xl border border-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.9)] text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-110">
+                          {social.icon}
+                        </div>
+                      </motion.a>
+                    ))}
+                  </div>
+                  <div>
+                    <p className="text-gray-600 text-sm mb-2 font-medium">
+                      Get in touch:
+                    </p>
+                    <a
+                      href="mailto:nadun@example.com"
+                      className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold"
+                    >
+                      nadun@example.com
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-200 my-8"></div>
+        <motion.div
+          className="relative my-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+          custom={6}
+          variants={fadeInUp}
+        >
+          <div className="absolute -inset-x-4 h-[1px]">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>
+          </div>
+          <div className="h-[1px] bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+        </motion.div>
 
         {/* Bottom Section - Copyright */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.5, delay: 0.6 }}
           className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+          custom={7}
+          variants={fadeInUp}
         >
-          <div className="text-gray-600 text-sm text-center md:text-left">
-            <p>
-              © {currentYear} Nadun Algoda. All rights reserved. Built with{" "}
-              <span className="text-red-500">♥</span> using React & Tailwind CSS
-            </p>
+          <div className="relative">
+            <div className="absolute -inset-[1px] rounded-xl">
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white via-blue-100/30 to-purple-100/30"></div>
+            </div>
+            <div className="relative bg-white/50 backdrop-blur-xl border border-white rounded-xl px-4 py-2 shadow-[0_2px_8px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.9)]">
+              <p className="text-gray-600 text-sm text-center md:text-left">
+                © {currentYear} Nadun Algoda. All rights reserved. Built with{" "}
+                <span className="text-red-500">♥</span> using React & Tailwind
+                CSS
+              </p>
+            </div>
           </div>
         </motion.div>
 
-        {/* Back to Top Button - Bounces Up */}
+        {/* Back to Top Button */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ type: "spring", stiffness: 100, delay: 0.8 }}
           className="text-center mt-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+          custom={8}
+          variants={fadeInUp}
         >
-          <a
-            href="#top"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-semibold text-base hover:bg-gray-800 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
-          >
-            <svg
-              className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div className="relative inline-block group">
+            <div className="absolute -inset-[1px] rounded-full opacity-70 group-hover:opacity-100 transition-opacity">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-700 to-gray-900"></div>
+            </div>
+            <a
+              href="#home"
+              className="relative inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-semibold text-base hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl group"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 10l7-7m0 0l7 7m-7-7v18"
-              />
-            </svg>
-            Back to Top
-          </a>
+              <svg
+                className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 10l7-7m0 0l7 7m-7-7v18"
+                />
+              </svg>
+              Back to Top
+            </a>
+          </div>
         </motion.div>
       </div>
+
+      <style>{`
+        @keyframes blob {
+          0%, 100% { transform: translate(0, 0) scale(1); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+          25% { transform: translate(30px, -50px) scale(1.1); border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+          50% { transform: translate(-20px, 20px) scale(0.9); border-radius: 50% 60% 30% 70% / 60% 40% 60% 30%; }
+          75% { transform: translate(50px, 30px) scale(1.05); border-radius: 70% 30% 50% 50% / 30% 70% 40% 60%; }
+        }
+        .animate-blob {
+          animation: blob 8s infinite ease-in-out;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
     </footer>
   );
 }
