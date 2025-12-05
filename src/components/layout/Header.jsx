@@ -6,6 +6,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("#home");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,6 +29,9 @@ export default function Header() {
       return;
     }
 
+    // Update active section immediately on click
+    setActiveSection(item.hash);
+
     // If we're not on home page, navigate to home first
     if (location.pathname !== "/") {
       navigate("/");
@@ -44,6 +48,12 @@ export default function Header() {
   const scrollToSection = (hash) => {
     if (hash === "#home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (hash === "#footer") {
+      // Scroll to bottom of page for footer
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
     } else {
       const element = document.querySelector(hash);
       if (element) {
@@ -59,16 +69,52 @@ export default function Header() {
     if (item.path === "/certifications") {
       return location.pathname === "/certifications";
     }
-    return location.pathname === "/" && location.hash === item.hash;
+    // Use activeSection state instead of location.hash
+    return location.pathname === "/" && activeSection === item.hash;
   };
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+
+      // Detect which section is in view and update active section
+      if (location.pathname === "/") {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.scrollY;
+
+        // Check if we're near the bottom of the page (for footer)
+        if (scrollTop + windowHeight >= documentHeight - 50) {
+          setActiveSection("#footer");
+          return;
+        }
+
+        // Check other sections
+        const sections = [
+          { hash: "#projects", element: document.querySelector("#projects") },
+          { hash: "#about", element: document.querySelector("#about") },
+          { hash: "#home", element: null },
+        ];
+
+        for (const section of sections) {
+          if (section.element) {
+            const rect = section.element.getBoundingClientRect();
+            if (rect.top <= 150 && rect.bottom > 150) {
+              setActiveSection(section.hash);
+              return;
+            }
+          }
+        }
+
+        // Default to home if nothing else matches
+        setActiveSection("#home");
+      }
     };
+
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Call once on mount
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>
@@ -111,7 +157,7 @@ export default function Header() {
                   onClick={() =>
                     window.scrollTo({ top: 0, behavior: "smooth" })
                   }
-                  className="text-lg font-bold bg-white text-transparent bg-clip-text hover:scale-105 transition-transform duration-300 drop-shadow-sm"
+                  className="text-lg font-bold bg-gradient-to-r from-gray-800 to-gray-900 text-transparent bg-clip-text hover:scale-105 transition-transform duration-300 drop-shadow-sm"
                 >
                   Nadun Algoda
                 </Link>
@@ -132,7 +178,7 @@ export default function Header() {
                     className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
                       isActive(item)
                         ? "bg-black/80 text-white shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-xl"
-                        : "text-white hover:text-black hover:bg-black/10 hover:shadow-[inset_0_1px_0_rgba(0,0,0,0.1)]"
+                        : "text-gray-800 hover:text-black hover:bg-white/20 hover:shadow-[inset_0_1px_0_rgba(0,0,0,0.1)]"
                     }`}
                   >
                     {item.name}
@@ -150,7 +196,7 @@ export default function Header() {
                 <motion.button
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="p-2 text-white hover:bg-white/15 rounded-full transition-all duration-300"
+                  className="p-2 text-gray-800 hover:bg-white/20 rounded-full transition-all duration-300"
                 >
                   {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                 </motion.button>
@@ -190,7 +236,7 @@ export default function Header() {
                         className={`block px-4 py-3 text-sm font-medium rounded-2xl transition-all duration-300 ${
                           isActive(item)
                             ? "bg-black/80 text-white shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-xl"
-                            : "text-white hover:bg-black/10 hover:text-white hover:shadow-[inset_0_1px_0_rgba(0,0,0,0.1)]"
+                            : "text-gray-800 hover:bg-white/20 hover:text-black hover:shadow-[inset_0_1px_0_rgba(0,0,0,0.1)]"
                         }`}
                       >
                         {item.name}

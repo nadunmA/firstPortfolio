@@ -2,6 +2,26 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 
+// 💡 HELPER COMPONENT: Glass Panel (Simplified for footer sections)
+const GlassPanel = ({ children, className = "" }) => {
+  return (
+    <div className={`relative ${className}`}>
+      {/* 1. Inset Gradient Border Effect */}
+      <div className="absolute -inset-[1px] rounded-[inherit] overflow-hidden">
+        <div className="absolute inset-0 rounded-[inherit] bg-gradient-to-br from-white/40 via-blue-100/30 to-purple-100/30"></div>
+      </div>
+
+      {/* 2. Main Glass/Blur Layer */}
+      <div className="relative bg-white/70 backdrop-blur-xl rounded-[inherit] border border-white/80 p-6 shadow-lg">
+        {/* Subtle overlay gradient for depth/shine */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-[inherit]"></div>
+
+        <div className="relative z-10">{children}</div>
+      </div>
+    </div>
+  );
+};
+
 export default function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -148,30 +168,22 @@ export default function Footer() {
             custom={0}
             variants={fadeInUp}
           >
-            <div className="relative">
-              <div className="absolute -inset-[1px] rounded-2xl">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white via-blue-100/50 to-purple-100/50"></div>
-              </div>
-              <div className="relative bg-white/60 backdrop-blur-3xl border border-white rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)]">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-2xl"></div>
-                <div className="relative">
-                  <h3 className="text-2xl font-bold mb-4">
-                    <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
-                      Nadun Algoda
-                    </span>
-                  </h3>
-                  <p className="text-gray-700 font-semibold mb-3">
-                    Full-Stack Developer | Cloud Enthusiast | DevOps Enthusiast
-                  </p>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Passionate about building scalable applications and
-                    automating infrastructure. Currently pursuing my
-                    undergraduate degree at SLIIT while exploring the world of
-                    cloud computing and modern web technologies.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <GlassPanel className="rounded-2xl h-full">
+              <h3 className="text-2xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
+                  Nadun Algoda
+                </span>
+              </h3>
+              <p className="text-gray-700 font-semibold mb-3">
+                Full-Stack Developer | Cloud Enthusiast | DevOps Enthusiast
+              </p>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Passionate about building scalable applications and automating
+                infrastructure. Currently pursuing my undergraduate degree at
+                SLIIT while exploring the world of cloud computing and modern
+                web technologies.
+              </p>
+            </GlassPanel>
           </motion.div>
 
           {/* Quick Links */}
@@ -182,33 +194,25 @@ export default function Footer() {
             custom={2}
             variants={fadeInUp}
           >
-            <div className="relative">
-              <div className="absolute -inset-[1px] rounded-2xl">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white via-blue-100/50 to-purple-100/50"></div>
-              </div>
-              <div className="relative bg-white/60 backdrop-blur-3xl border border-white rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] h-full">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-2xl"></div>
-                <div className="relative">
-                  <h4 className="text-lg font-semibold mb-4 text-gray-900">
-                    Quick Links
-                  </h4>
-                  <ul className="space-y-3">
-                    {quickLinks.map((link) => (
-                      <li key={link.name}>
-                        <a
-                          href={link.hash || link.path}
-                          onClick={(e) => handleNavClick(e, link)}
-                          className="text-gray-600 hover:text-gray-900 transition-colors duration-300 flex items-center space-x-2 group cursor-pointer"
-                        >
-                          <span className="w-0 group-hover:w-2 h-px bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300"></span>
-                          <span className="font-medium">{link.name}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <GlassPanel className="rounded-2xl h-full">
+              <h4 className="text-lg font-semibold mb-4 text-gray-900">
+                Quick Links
+              </h4>
+              <ul className="space-y-3">
+                {quickLinks.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.hash || link.path}
+                      onClick={(e) => handleNavClick(e, link)}
+                      className="text-gray-600 hover:text-gray-900 transition-colors duration-300 flex items-center space-x-2 group cursor-pointer"
+                    >
+                      <span className="w-0 group-hover:w-2 h-px bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300"></span>
+                      <span className="font-medium">{link.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </GlassPanel>
           </motion.div>
 
           {/* Connect Section */}
@@ -219,51 +223,44 @@ export default function Footer() {
             custom={3}
             variants={fadeInUp}
           >
-            <div className="relative">
-              <div className="absolute -inset-[1px] rounded-2xl">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white via-blue-100/50 to-purple-100/50"></div>
+            <GlassPanel className="rounded-2xl h-full">
+              <h4 className="text-lg font-semibold mb-4 text-gray-900">
+                Connect
+              </h4>
+              <div className="flex flex-wrap gap-3 mb-6">
+                {socialLinks.map((social, index) => (
+                  <motion.a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative group rounded-lg"
+                    title={social.name}
+                    custom={index + 4}
+                    variants={popIn}
+                  >
+                    <div className="absolute -inset-[1px] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-400 to-purple-400"></div>
+                    </div>
+                    {/* Simplified icon button style for hover effect */}
+                    <div className="relative p-3 bg-white/80 backdrop-blur-xl border border-white/90 rounded-lg shadow-sm text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-110">
+                      {social.icon}
+                    </div>
+                  </motion.a>
+                ))}
               </div>
-              <div className="relative bg-white/60 backdrop-blur-3xl border border-white rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] h-full">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-2xl"></div>
-                <div className="relative">
-                  <h4 className="text-lg font-semibold mb-4 text-gray-900">
-                    Connect
-                  </h4>
-                  <div className="flex flex-wrap gap-3 mb-6">
-                    {socialLinks.map((social, index) => (
-                      <motion.a
-                        key={social.name}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="relative group"
-                        title={social.name}
-                        custom={index + 4}
-                        variants={popIn}
-                      >
-                        <div className="absolute -inset-[1px] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-400 to-purple-400"></div>
-                        </div>
-                        <div className="relative p-3 bg-white/70 backdrop-blur-xl border border-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.9)] text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-110">
-                          {social.icon}
-                        </div>
-                      </motion.a>
-                    ))}
-                  </div>
-                  <div>
-                    <p className="text-gray-600 text-sm mb-2 font-medium">
-                      Get in touch:
-                    </p>
-                    <a
-                      href="mailto:nadun@example.com"
-                      className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold"
-                    >
-                      nadun@example.com
-                    </a>
-                  </div>
-                </div>
+              <div>
+                <p className="text-gray-600 text-sm mb-2 font-medium">
+                  Get in touch:
+                </p>
+                <a
+                  href="mailto:nadun@example.com"
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold"
+                >
+                  nadun@example.com
+                </a>
               </div>
-            </div>
+            </GlassPanel>
           </motion.div>
         </div>
 
@@ -276,11 +273,7 @@ export default function Footer() {
           custom={6}
           variants={fadeInUp}
         >
-          <div className="absolute -inset-x-4 h-[1px]">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>
-          </div>
-          <div className="h-[1px] bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
         </motion.div>
 
         {/* Bottom Section - Copyright */}
@@ -292,61 +285,50 @@ export default function Footer() {
           custom={7}
           variants={fadeInUp}
         >
-          <div className="relative">
-            <div className="absolute -inset-[1px] rounded-xl">
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white via-blue-100/30 to-purple-100/30"></div>
-            </div>
-            <div className="relative bg-white/50 backdrop-blur-xl border border-white rounded-xl px-4 py-2 shadow-[0_2px_8px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.9)]">
-              <p className="text-gray-600 text-sm text-center md:text-left">
-                © {currentYear} Nadun Algoda. All rights reserved.
-              </p>
-            </div>
+          {/* Copyright Text (Simplified style) */}
+          <div className="relative px-4 py-2 bg-white/70 backdrop-blur-md border border-white/80 rounded-xl shadow-sm">
+            <p className="text-gray-600 text-sm text-center md:text-left">
+              © {currentYear} Nadun Algoda. All rights reserved.
+            </p>
           </div>
-        </motion.div>
 
-        {/* Back to Top Button */}
-        <motion.div
-          className="text-center mt-12"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false }}
-          custom={8}
-          variants={fadeInUp}
-        >
-          <div className="relative inline-block group">
-            <div className="absolute -inset-[1px] rounded-full opacity-70 group-hover:opacity-100 transition-opacity">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-700 to-gray-900"></div>
-            </div>
-            <a
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                if (location.pathname !== "/") {
-                  navigate("/");
-                  setTimeout(() => {
+          {/* Back to Top Button */}
+          <div className="text-center md:order-last">
+            <div className="relative inline-block group">
+              <div className="absolute -inset-[1px] rounded-full opacity-70 group-hover:opacity-100 transition-opacity">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-purple-600"></div>
+              </div>
+              <a
+                href="#home"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (location.pathname !== "/") {
+                    navigate("/");
+                    setTimeout(() => {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }, 100);
+                  } else {
                     window.scrollTo({ top: 0, behavior: "smooth" });
-                  }, 100);
-                } else {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }
-              }}
-              className="relative inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-semibold text-base hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl group cursor-pointer"
-            >
-              <svg
-                className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+                  }
+                }}
+                className="relative inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-semibold text-base hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl group cursor-pointer"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 10l7-7m0 0l7 7m-7-7v18"
-                />
-              </svg>
-              Back to Top
-            </a>
+                <svg
+                  className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 10l7-7m0 0l7 7m-7-7v18"
+                  />
+                </svg>
+                Back to Top
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>

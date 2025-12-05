@@ -98,9 +98,9 @@ export default function HeroSection() {
                 <span className="animate-pulse">|</span>
               </p>
               <p className="text-base md:text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                Passionate about building scalable applications and automating
-                infrastructure. Expertise in modern web technologies, cloud
-                platforms, and DevOps practices.
+                MERN full-stack developer interested in cloud engineering and
+                DevOps, focused on building scalable apps and improving
+                automation skills.
               </p>
             </motion.div>
 
@@ -225,7 +225,7 @@ export default function HeroSection() {
             >
               {/* Icons content*/}
               <a
-                href="https://github.com/nadunalgoda"
+                href="https://github.com/nadunmA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 flex items-center justify-center bg-white/5 border border-white/20 rounded-full hover:bg-white hover:border-white transition-all duration-300 hover:scale-110 group"
@@ -240,7 +240,7 @@ export default function HeroSection() {
               </a>
               {/* Other icons... */}
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/nadunal21/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 flex items-center justify-center bg-white/5 border border-white/20 rounded-full hover:bg-white hover:border-white transition-all duration-300 hover:scale-110 group"

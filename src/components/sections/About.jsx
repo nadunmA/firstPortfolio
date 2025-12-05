@@ -1,6 +1,42 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+/**
+ * 1. REUSABLE GLASS CARD COMPONENT
+ * Abstraction for the complex glassmorphism styling used throughout the section.
+ * @param {object} props - Component props
+ * @param {React.ReactNode} props.children - Content to be displayed inside the card.
+ * @param {string} props.className - Additional Tailwind classes for the outer container.
+ * @param {boolean} [props.isHoverable=true] - Toggles hover effects (scale, background change).
+ */
+const GlassCard = ({ children, className = "", isHoverable = true }) => {
+  const hoverClasses = isHoverable
+    ? "hover:bg-white/80 hover:scale-[1.01] transition-all duration-500"
+    : "";
+
+  // Base shadow is a slightly softer version of your original style
+  const baseShadow = "shadow-[0_8px_32px_rgba(0,0,0,0.08)]";
+
+  return (
+    <div className={`relative ${className}`}>
+      {/* 1. Inset Gradient Border Effect (The soft light ring) */}
+      <div className="absolute -inset-[1px] rounded-[inherit] overflow-hidden">
+        <div className="absolute inset-0 rounded-[inherit] bg-gradient-to-br from-white/40 via-blue-100/30 to-purple-100/30"></div>
+      </div>
+
+      {/* 2. Main Glass/Blur Layer */}
+      <div
+        className={`relative bg-white/70 backdrop-blur-xl rounded-[inherit] border border-white/80 ${baseShadow} ${hoverClasses}`}
+      >
+        {/* Subtle overlay gradient for depth/shine */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-[inherit]"></div>
+
+        <div className="relative z-10">{children}</div>
+      </div>
+    </div>
+  );
+};
+
 export default function About() {
   const technologies = [
     {
@@ -104,131 +140,112 @@ export default function About() {
   };
 
   return (
-    <section
-      id="about"
-      className="relative min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 py-20 overflow-hidden"
-    >
-      {/* Animated Liquid Background*/}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-        <div className="absolute top-0 -right-40 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-40 left-20 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-6000"></div>
-      </div>
+    <>
+      <section
+        id="about"
+        className="relative min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 py-20 overflow-hidden"
+      >
+        {/* Animated Liquid Background*/}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+          <div className="absolute top-0 -right-40 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-40 left-20 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+          <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-6000"></div>
+        </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false }}
-          custom={0}
-          variants={fadeInUp}
-        >
-          <p className="text-sm md:text-base text-gray-600 font-medium tracking-wide uppercase mb-4">
-            Get to know me
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
-            About{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
-              Nadun Algoda
-            </span>
-          </h2>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-start mb-20">
-          {/* Profile Card*/}
-          <motion.div
-            className="relative"
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header (Using motion.header for semantics) */}
+          <motion.header
+            className="text-center mb-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false }}
-            custom={1}
+            custom={0}
             variants={fadeInUp}
           >
-            {/* Liquid glass border effect */}
-            <div className="absolute -inset-[1px] rounded-3xl">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white via-blue-100/50 to-purple-100/50"></div>
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tl from-blue-200/40 via-white/50 to-purple-200/40"></div>
-            </div>
+            <p className="text-sm md:text-base text-gray-600 font-medium tracking-wide uppercase mb-4">
+              Get to know me
+            </p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
+              About{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+                Nadun Algoda
+              </span>
+            </h2>
+          </motion.header>
 
-            {/* Main White Glass Card */}
-            <div className="relative bg-white/70 backdrop-blur-3xl rounded-3xl border border-white shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] p-8 hover:bg-white/80 transition-all duration-500">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-3xl"></div>
+          <div className="grid lg:grid-cols-2 gap-12 items-start mb-20">
+            {/* Profile Card (Simplified using GlassCard) */}
+            <motion.div
+              className="rounded-3xl"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false }}
+              custom={1}
+              variants={fadeInUp}
+            >
+              <GlassCard className="rounded-3xl p-0">
+                <div className="p-8">
+                  {/* Profile Image (Simplified border effects) */}
+                  <div className="w-36 h-36 mx-auto mb-6 relative">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 rounded-full animate-spin-slow"></div>
+                    <div className="absolute inset-1 bg-white rounded-full"></div>
+                    <div className="absolute inset-2 bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-xl">
+                      <svg
+                        className="w-16 h-16 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
 
-              {/* Liquid Shimmer Effect */}
-              <div className="absolute inset-0 rounded-3xl overflow-hidden opacity-40">
-                <div className="absolute top-0 -left-full h-full w-1/2 bg-gradient-to-r from-transparent via-white to-transparent skew-x-12 animate-shimmer"></div>
-              </div>
+                  {/* Name & Title */}
+                  <div className="text-center mb-8">
+                    <h3 className="text-3xl font-bold text-gray-900 mb-2">
+                      Nadun Algoda
+                    </h3>
+                    <p className="text-gray-600 text-lg">
+                      Full-Stack Developer & Cloud Enthusiast
+                    </p>
+                  </div>
 
-              <div className="relative z-10">
-                {/* Profile Image */}
-                <div className="w-36 h-36 mx-auto mb-6 relative">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 rounded-full animate-spin-slow"></div>
-                  <div className="absolute inset-1 bg-white rounded-full"></div>
-                  <div className="absolute inset-2 bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-xl">
-                    <svg
-                      className="w-16 h-16 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
+                  {/* Badges */}
+                  <div className="flex flex-wrap justify-center gap-3">
+                    {["MERN Stack", "Cloud Engineering", "DevOps"].map(
+                      (badge, i) => (
+                        <span
+                          key={i}
+                          className="px-5 py-2 bg-white/70 backdrop-blur-xl border border-white/80 rounded-full text-gray-800 text-sm font-medium shadow-md hover:bg-white/90 hover:scale-105 transition-all duration-300"
+                        >
+                          {badge}
+                        </span>
+                      )
+                    )}
                   </div>
                 </div>
+              </GlassCard>
+            </motion.div>
 
-                {/* Name & Title */}
-                <div className="text-center mb-8">
-                  <h3 className="text-3xl font-bold text-gray-900 mb-2">
-                    Nadun Algoda
-                  </h3>
-                  <p className="text-gray-600 text-lg">
-                    Full-Stack Developer & Cloud Enthusiast
-                  </p>
-                </div>
-
-                {/* Badges */}
-                <div className="flex flex-wrap justify-center gap-3">
-                  {["MERN Stack", "Cloud Engineering", "DevOps"].map(
-                    (badge, i) => (
-                      <span
-                        key={i}
-                        className="px-5 py-2 bg-white/60 backdrop-blur-xl border border-white/80 rounded-full text-gray-800 text-sm font-medium shadow-[0_2px_8px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.9)] hover:bg-white/80 hover:scale-105 transition-all duration-300"
-                      >
-                        {badge}
-                      </span>
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Content */}
-          <motion.div
-            className="space-y-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false }}
-            custom={2}
-            variants={fadeInUp}
-          >
-            {/* Text Content */}
-            <div className="relative">
-              <div className="absolute -inset-[1px] rounded-3xl">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white via-blue-100/50 to-purple-100/50"></div>
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-tl from-blue-200/40 via-white/50 to-purple-200/40"></div>
-              </div>
-              <div className="relative bg-white/70 backdrop-blur-3xl border border-white rounded-3xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)]">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-3xl"></div>
-                <div className="relative text-gray-700 leading-relaxed space-y-4 text-lg">
+            {/* Right Content */}
+            <motion.div
+              className="space-y-6"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false }}
+              custom={2}
+              variants={fadeInUp}
+            >
+              {/* Text Content (Simplified using GlassCard) */}
+              <GlassCard className="rounded-3xl p-0" isHoverable={false}>
+                <div className="relative text-gray-700 leading-relaxed space-y-4 text-lg p-8">
                   <p>
                     I'm a passionate{" "}
                     <span className="font-bold text-gray-900">
@@ -257,155 +274,155 @@ export default function About() {
                     and deploying cloud-native solutions.
                   </p>
                 </div>
-              </div>
-            </div>
+              </GlassCard>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4">
-              {[
-                {
-                  num: "3+",
-                  label: "Projects",
-                  gradient: "from-blue-600 to-cyan-600",
-                },
-                {
-                  num: "10+",
-                  label: "Technologies",
-                  gradient: "from-purple-600 to-pink-600",
-                },
-                {
-                  num: "1+",
-                  label: "Years",
-                  gradient: "from-orange-600 to-red-600",
-                },
-              ].map((stat, i) => (
-                <div key={i} className="relative">
-                  <div className="absolute -inset-[1px] rounded-2xl">
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white via-blue-100/30 to-purple-100/30"></div>
-                  </div>
-                  <div className="relative bg-white/70 backdrop-blur-3xl border border-white rounded-2xl p-4 text-center shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] hover:bg-white/80 hover:scale-105 transition-all duration-300">
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-2xl"></div>
-                    <div className="relative">
-                      <div
-                        className={`text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} mb-1`}
-                      >
-                        {stat.num}
+              {/* Stats (Simplified using GlassCard) */}
+              <div className="grid grid-cols-3 gap-4">
+                {[
+                  {
+                    num: "3+",
+                    label: "Projects",
+                    gradient: "from-blue-600 to-cyan-600",
+                  },
+                  {
+                    num: "10+",
+                    label: "Technologies",
+                    gradient: "from-purple-600 to-pink-600",
+                  },
+                  {
+                    num: "1+",
+                    label: "Years",
+                    gradient: "from-orange-600 to-red-600",
+                  },
+                ].map((stat, i) => (
+                  <div key={i} className="rounded-2xl">
+                    <GlassCard className="rounded-2xl p-0">
+                      <div className="relative text-center p-4">
+                        <div
+                          className={`text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} mb-1`}
+                        >
+                          {stat.num}
+                        </div>
+                        <div className="text-gray-600 text-sm">
+                          {stat.label}
+                        </div>
                       </div>
-                      <div className="text-gray-600 text-sm">{stat.label}</div>
+                    </GlassCard>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Highlight Cards (Simplified structure but kept hover effect) */}
+          <div className="grid md:grid-cols-3 gap-6 mb-20">
+            {highlights.map((item, i) => (
+              <motion.div
+                key={i}
+                className="relative group rounded-3xl"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false }}
+                custom={i + 3}
+                variants={fadeInUp}
+              >
+                <GlassCard className="rounded-3xl p-0">
+                  <div className="p-6 relative">
+                    {/* Inner Hover/Shimmer Effect */}
+                    <div className="absolute inset-0 rounded-3xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                      {/* Gradient background hover effect */}
+                      <div
+                        className={`absolute inset-0 rounded-3xl bg-gradient-to-tl ${item.gradient} opacity-20 group-hover:opacity-40 transition-opacity duration-500`}
+                      ></div>
+                      {/* Shimmer effect */}
+                      <div className="absolute top-0 -left-full h-full w-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-12 group-hover:left-full transition-all duration-1000"></div>
+                    </div>
+
+                    <div className="relative z-10">
+                      <div
+                        className={`w-14 h-14 bg-gradient-to-br ${item.gradient} rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                      >
+                        <svg
+                          className="w-7 h-7 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d={item.icon}
+                          />
+                        </svg>
+                      </div>
+                      <h4 className="font-bold text-gray-900 text-lg mb-2">
+                        {item.title}
+                      </h4>
+                      <p className="text-gray-600 text-sm leading-relaxed">
+                        {item.desc}
+                      </p>
                     </div>
                   </div>
+                </GlassCard>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Tech Stack Section Header */}
+          <motion.div
+            className="text-center mb-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            custom={6}
+            variants={fadeInUp}
+          >
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              Technologies I Work With
+            </h3>
+            <p className="text-gray-600">
+              Constantly learning and adapting to new technologies
+            </p>
+          </motion.div>
+
+          {/* Non-Scrolling Tech Grid (Simplified using GlassCard) */}
+          <motion.div
+            className="relative py-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            custom={7}
+            variants={fadeInUp}
+          >
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+              {technologies.map((tech, index) => (
+                <div
+                  key={`${tech.name}-${index}`}
+                  className="relative flex-shrink-0 rounded-xl"
+                >
+                  <GlassCard className="rounded-xl p-0">
+                    <div className="relative px-4 sm:px-6 py-3 sm:py-4 flex items-center space-x-2 sm:space-x-3">
+                      <img
+                        src={tech.logo}
+                        alt={tech.name}
+                        className="relative w-7 h-7 sm:w-8 sm:h-8 object-contain z-10"
+                      />
+                      <span className="relative text-gray-800 font-medium text-sm sm:text-base whitespace-nowrap z-10">
+                        {tech.name}
+                      </span>
+                    </div>
+                  </GlassCard>
                 </div>
               ))}
             </div>
           </motion.div>
         </div>
+      </section>
 
-        {/* Highlight Cards*/}
-        <div className="grid md:grid-cols-3 gap-6 mb-46">
-          {highlights.map((item, i) => (
-            <motion.div
-              key={i}
-              className="relative group"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false }}
-              custom={i + 2}
-              variants={fadeInUp}
-            >
-              <div className="absolute -inset-[1px] rounded-3xl">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white via-blue-100/50 to-purple-100/50"></div>
-                <div
-                  className={`absolute inset-0 rounded-3xl bg-gradient-to-tl ${item.gradient} opacity-20 group-hover:opacity-40 transition-opacity duration-500`}
-                ></div>
-              </div>
-              <div className="relative bg-white/70 backdrop-blur-3xl border border-white rounded-3xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] h-full hover:bg-white/80 transition-all duration-500 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-3xl"></div>
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                  <div className="absolute top-0 -left-full h-full w-1/2 bg-gradient-to-r from-transparent via-white to-transparent skew-x-12 group-hover:left-full transition-all duration-1000"></div>
-                </div>
-                <div className="relative">
-                  <div
-                    className={`w-14 h-14 bg-gradient-to-br ${item.gradient} rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <svg
-                      className="w-7 h-7 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d={item.icon}
-                      />
-                    </svg>
-                  </div>
-                  <h4 className="font-bold text-gray-900 text-lg mb-2">
-                    {item.title}
-                  </h4>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Tech Stack Section */}
-        <motion.div
-          className="text-center mb-12"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false }}
-          custom={1}
-          variants={fadeInUp}
-        >
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-            Technologies I Work With
-          </h3>
-          <p className="text-gray-600">
-            Constantly learning and adapting to new technologies
-          </p>
-        </motion.div>
-
-        {/* Non-Scrolling Tech Grid*/}
-        <motion.div
-          className="relative py-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false }}
-          custom={2}
-          variants={fadeInUp}
-        >
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-            {technologies.map((tech, index) => (
-              <div
-                key={`${tech.name}-${index}`}
-                className="relative flex-shrink-0"
-              >
-                <div className="absolute -inset-[1px] rounded-xl">
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white via-blue-100/30 to-purple-100/30"></div>
-                </div>
-                <div className="relative px-4 sm:px-6 py-3 sm:py-4 bg-white/70 backdrop-blur-3xl border border-white rounded-xl flex items-center space-x-2 sm:space-x-3 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] hover:bg-white/80 hover:scale-105 transition-all duration-300 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent"></div>
-                  <img
-                    src={tech.logo}
-                    alt={tech.name}
-                    className="relative w-7 h-7 sm:w-8 sm:h-8 object-contain z-10"
-                  />
-                  <span className="relative text-gray-800 font-medium text-sm sm:text-base whitespace-nowrap z-10">
-                    {tech.name}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-
+      {/* Custom CSS STYLES */}
       <style>{`
+        /* Keeping custom CSS animations for visual consistency */
         @keyframes blob {
           0%, 100% { transform: translate(0, 0) scale(1); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
           25% { transform: translate(30px, -50px) scale(1.1); border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
@@ -432,13 +449,11 @@ export default function About() {
         .animation-delay-6000 {
           animation-delay: 6s;
         }
-        .animate-shimmer {
-          animation: shimmer 3s infinite;
-        }
+        /* Note: shimmer animation is now only used in highlight cards */
         .animate-spin-slow {
           animation: spin-slow 8s linear infinite;
         }
       `}</style>
-    </section>
+    </>
   );
 }
