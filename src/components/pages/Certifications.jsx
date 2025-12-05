@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import aws from "../../Images/aws.png"; // aws image eka import karala thiyenawa.
+import aws from "../../Images/aws.png";
 
-// 💡 REUSABLE HELPER COMPONENT: Glass Card/Panel
 const GlassCard = ({
   children,
   className = "",
@@ -13,7 +12,6 @@ const GlassCard = ({
     ? "group-hover:bg-white/80 group-hover:scale-[1.01] transition-all duration-500"
     : "";
 
-  // Base shadow is consistent with previous sections
   const baseShadow = "shadow-[0_8px_32px_rgba(0,0,0,0.08)]";
 
   return (
@@ -21,16 +19,16 @@ const GlassCard = ({
       className={`relative ${className} ${isHoverable ? "group" : ""}`}
       onClick={onClick}
     >
-      {/* 1. Inset Gradient Border Effect */}
+      {/* Inset Gradient Border Effect */}
       <div className="absolute -inset-[1px] rounded-[inherit] overflow-hidden">
         <div className="absolute inset-0 rounded-[inherit] bg-gradient-to-br from-white/40 via-blue-100/30 to-purple-100/30"></div>
       </div>
 
-      {/* 2. Main Glass/Blur Layer */}
+      {/* Main Glass/Blur Layer */}
       <div
         className={`relative bg-white/70 backdrop-blur-xl rounded-[inherit] border border-white/80 ${baseShadow} ${hoverClasses}`}
       >
-        {/* Subtle overlay gradient for depth/shine */}
+        {/* Subtle overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-[inherit]"></div>
 
         <div className="relative z-10">{children}</div>
@@ -47,7 +45,6 @@ export default function Certifications() {
   const [selectedCert, setSelectedCert] = useState(null);
   const [isCertificateViewOpen, setIsCertificateViewOpen] = useState(false);
 
-  // Note: Added `certificateImage` property to the object for future flexibility
   const certifications = [
     {
       id: 1,
@@ -57,17 +54,10 @@ export default function Certifications() {
       credentialId: "AWS-12345",
       icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
       gradient: "from-orange-400 to-red-400",
-      skills: [
-        "Cloud Architecture",
-        "AWS Services",
-        "Security",
-        "Scalability",
-        "AI/ML Integration",
-      ],
+      skills: ["Cloud Architecture", "AWS Services", "Ai", "Q Developer"],
       logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
-      certificateImage: aws, // Using the imported image here
+      certificateImage: aws,
     },
-    // Add more certifications here...
   ];
 
   const fadeInUp = {
@@ -85,7 +75,7 @@ export default function Certifications() {
 
   const handleOpenDetails = (cert) => {
     setSelectedCert(cert);
-    setIsCertificateViewOpen(false); // Ensure image view is closed
+    setIsCertificateViewOpen(false);
   };
 
   const handleViewCertificate = (e) => {
@@ -98,7 +88,6 @@ export default function Certifications() {
     setIsCertificateViewOpen(false);
   };
 
-  // Component to render a single Certificate Card
   const CertificateCard = ({ cert, i }) => (
     <motion.div
       initial="hidden"
@@ -147,7 +136,7 @@ export default function Certifications() {
               />
             </div>
 
-            {/* Title & Issuer */}
+            {/* Title */}
             <h3 className="font-bold text-gray-900 text-lg mb-2 line-clamp-2">
               {cert.title}
             </h3>
@@ -243,7 +232,7 @@ export default function Certifications() {
           ))}
         </div>
 
-        {/* Modal (Certificate Details) */}
+        {/*Certificate Details*/}
         {selectedCert && !isCertificateViewOpen && (
           <motion.div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50"
@@ -259,7 +248,6 @@ export default function Certifications() {
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Using GlassCard for the Modal Content */}
               <GlassCard className="rounded-3xl p-0" isHoverable={false}>
                 <div className="relative p-8">
                   {/* Close Button */}
@@ -314,7 +302,7 @@ export default function Certifications() {
                     </div>
                   </div>
 
-                  {/* Credential ID */}
+                  {/* Credential */}
                   <div className="mb-6 p-4 bg-white/60 backdrop-blur-xl border border-white/80 rounded-2xl">
                     <p className="text-sm text-gray-600 mb-1">Credential ID</p>
                     <p className="font-mono font-semibold text-gray-900">
@@ -358,7 +346,7 @@ export default function Certifications() {
         )}
       </div>
 
-      {/* New Certificate Image View Modal */}
+      {/* New Certificate Image */}
       {isCertificateViewOpen && selectedCert && (
         <motion.div
           className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-[999]" // Increased Z-index
@@ -409,7 +397,7 @@ export default function Certifications() {
         </motion.div>
       )}
 
-      {/* Custom CSS STYLES (Kept Same) */}
+      {/* Custom CSS */}
       <style>{`
         @keyframes blob {
           0%, 100% { transform: translate(0, 0) scale(1); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }

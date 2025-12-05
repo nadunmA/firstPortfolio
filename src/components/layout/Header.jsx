@@ -22,7 +22,6 @@ export default function Header() {
     e.preventDefault();
     setIsMobileMenuOpen(false);
 
-    // If it's the certifications page route
     if (item.path === "/certifications") {
       navigate("/certifications");
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -32,15 +31,13 @@ export default function Header() {
     // Update active section immediately on click
     setActiveSection(item.hash);
 
-    // If we're not on home page, navigate to home first
     if (location.pathname !== "/") {
       navigate("/");
-      // Wait for navigation, then scroll
+
       setTimeout(() => {
         scrollToSection(item.hash);
       }, 100);
     } else {
-      // Already on home page, just scroll
       scrollToSection(item.hash);
     }
   };
@@ -49,7 +46,6 @@ export default function Header() {
     if (hash === "#home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (hash === "#footer") {
-      // Scroll to bottom of page for footer
       window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: "smooth",
@@ -69,7 +65,7 @@ export default function Header() {
     if (item.path === "/certifications") {
       return location.pathname === "/certifications";
     }
-    // Use activeSection state instead of location.hash
+
     return location.pathname === "/" && activeSection === item.hash;
   };
 
@@ -77,19 +73,16 @@ export default function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // Detect which section is in view and update active section
       if (location.pathname === "/") {
         const windowHeight = window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
         const scrollTop = window.scrollY;
 
-        // Check if we're near the bottom of the page (for footer)
         if (scrollTop + windowHeight >= documentHeight - 50) {
           setActiveSection("#footer");
           return;
         }
 
-        // Check other sections
         const sections = [
           { hash: "#projects", element: document.querySelector("#projects") },
           { hash: "#about", element: document.querySelector("#about") },
@@ -106,13 +99,12 @@ export default function Header() {
           }
         }
 
-        // Default to home if nothing else matches
         setActiveSection("#home");
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Call once on mount
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 

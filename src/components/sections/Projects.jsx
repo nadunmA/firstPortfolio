@@ -1,12 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-// Assume solomonImg and busTricky are correctly defined/imported
 import solomonImg from "../../Images/solomon.png";
 import busTricky from "../../Images/bus.png";
 
-// Placeholder images for demonstration since actual imports are relative
-
-// 💡 Best Practice: Abstract the Project Card into a separate component for clean code.
 const ProjectCard = ({ project, index, fadeInUp }) => {
   return (
     <motion.div
@@ -18,13 +14,13 @@ const ProjectCard = ({ project, index, fadeInUp }) => {
       custom={index + 1}
       variants={fadeInUp}
     >
-      {/* 1. Liquid Glass Border Effect */}
+      {/* Liquid Glass Border Effect */}
       <div className="absolute -inset-[1px] rounded-3xl">
         <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/50 via-blue-100/50 to-purple-100/50"></div>
         <div className="absolute inset-0 rounded-3xl bg-gradient-to-tl from-blue-200/40 via-white/50 to-purple-200/40"></div>
       </div>
 
-      {/* 2. Main Card Body */}
+      {/* Main Card Body */}
       <div className="relative bg-white/70 backdrop-blur-3xl rounded-3xl border border-white shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] overflow-hidden h-full flex flex-col hover:bg-white/80 transition-all duration-500 min-h-[480px]">
         {/* Inner white reflection */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent"></div>
@@ -61,7 +57,6 @@ const ProjectCard = ({ project, index, fadeInUp }) => {
               {project.tags.map((tag, tagIndex) => (
                 <span
                   key={tagIndex}
-                  // Simplified tag style for visual balance with the card
                   className="px-3 py-1 bg-white/70 backdrop-blur-xl border border-white/80 rounded-full text-xs font-semibold text-gray-700 shadow-sm"
                 >
                   {tag}
@@ -69,7 +64,7 @@ const ProjectCard = ({ project, index, fadeInUp }) => {
               ))}
             </div>
 
-            {/* Action Buttons (Using mt-auto to push to bottom) */}
+            {/* Action Buttons */}
             <div className="flex gap-3 mt-auto">
               {/* Live Demo Button */}
               <a
@@ -147,7 +142,7 @@ export default function Projects() {
     },
   ];
 
-  // Animation Variants (Kept same)
+  // Animation Variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
     visible: (custom) => ({
@@ -166,7 +161,7 @@ export default function Projects() {
       id="projects"
       className="relative min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 py-20 overflow-hidden"
     >
-      {/* Animated Liquid Background - (Kept same) */}
+      {/* Animated Liquid Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
         <div className="absolute top-0 -right-40 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
@@ -174,7 +169,7 @@ export default function Projects() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header (Using motion.header for semantics)*/}
+        {/* Section Header */}
         <motion.header
           className="text-center mb-16"
           initial="hidden"
@@ -201,7 +196,6 @@ export default function Projects() {
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {projects.map((project, index) => (
-            // Using the abstracted ProjectCard component here
             <ProjectCard
               key={project.id}
               project={project}
@@ -211,13 +205,13 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* View More Button (Kept same) */}
+        {/* View More Button */}
         <motion.div
           className="text-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false }}
-          custom={projects.length + 1} // Ensure proper staggering after projects
+          custom={projects.length + 1}
           variants={fadeInUp}
         >
           <div className="relative inline-block group">

@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 
-// 💡 HELPER COMPONENT: Glass Panel (Simplified for footer sections)
 const GlassPanel = ({ children, className = "" }) => {
   return (
     <div className={`relative ${className}`}>
@@ -11,9 +10,9 @@ const GlassPanel = ({ children, className = "" }) => {
         <div className="absolute inset-0 rounded-[inherit] bg-gradient-to-br from-white/40 via-blue-100/30 to-purple-100/30"></div>
       </div>
 
-      {/* 2. Main Glass/Blur Layer */}
+      {/* Main Glass/Blur Layer */}
       <div className="relative bg-white/70 backdrop-blur-xl rounded-[inherit] border border-white/80 p-6 shadow-lg">
-        {/* Subtle overlay gradient for depth/shine */}
+        {/* Subtle overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent rounded-[inherit]"></div>
 
         <div className="relative z-10">{children}</div>
@@ -87,22 +86,19 @@ export default function Footer() {
   const handleNavClick = (e, item) => {
     e.preventDefault();
 
-    // If it's the certifications page route
     if (item.path === "/certifications") {
       navigate("/certifications");
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
-    // If we're not on home page, navigate to home first
     if (location.pathname !== "/") {
       navigate("/");
-      // Wait for navigation, then scroll
+
       setTimeout(() => {
         scrollToSection(item.hash);
       }, 100);
     } else {
-      // Already on home page, just scroll
       scrollToSection(item.hash);
     }
   };
@@ -285,7 +281,7 @@ export default function Footer() {
           custom={7}
           variants={fadeInUp}
         >
-          {/* Copyright Text (Simplified style) */}
+          {/* Copyright Text */}
           <div className="relative px-4 py-2 bg-white/70 backdrop-blur-md border border-white/80 rounded-xl shadow-sm">
             <p className="text-gray-600 text-sm text-center md:text-left">
               © {currentYear} Nadun Algoda. All rights reserved.

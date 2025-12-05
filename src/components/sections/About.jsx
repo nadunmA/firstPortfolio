@@ -14,17 +14,16 @@ const GlassCard = ({ children, className = "", isHoverable = true }) => {
     ? "hover:bg-white/80 hover:scale-[1.01] transition-all duration-500"
     : "";
 
-  // Base shadow is a slightly softer version of your original style
   const baseShadow = "shadow-[0_8px_32px_rgba(0,0,0,0.08)]";
 
   return (
     <div className={`relative ${className}`}>
-      {/* 1. Inset Gradient Border Effect (The soft light ring) */}
+      {/* Inset Gradient Border Effect */}
       <div className="absolute -inset-[1px] rounded-[inherit] overflow-hidden">
         <div className="absolute inset-0 rounded-[inherit] bg-gradient-to-br from-white/40 via-blue-100/30 to-purple-100/30"></div>
       </div>
 
-      {/* 2. Main Glass/Blur Layer */}
+      {/* Main Glass/Blur Layer */}
       <div
         className={`relative bg-white/70 backdrop-blur-xl rounded-[inherit] border border-white/80 ${baseShadow} ${hoverClasses}`}
       >
@@ -154,7 +153,7 @@ export default function About() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header (Using motion.header for semantics) */}
+          {/* Section Header */}
           <motion.header
             className="text-center mb-16"
             initial="hidden"
@@ -175,7 +174,7 @@ export default function About() {
           </motion.header>
 
           <div className="grid lg:grid-cols-2 gap-12 items-start mb-20">
-            {/* Profile Card (Simplified using GlassCard) */}
+            {/* Profile Card */}
             <motion.div
               className="rounded-3xl"
               initial="hidden"
@@ -186,7 +185,7 @@ export default function About() {
             >
               <GlassCard className="rounded-3xl p-0">
                 <div className="p-8">
-                  {/* Profile Image (Simplified border effects) */}
+                  {/* Profile Image */}
                   <div className="w-36 h-36 mx-auto mb-6 relative">
                     <div className="absolute inset-0 bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 rounded-full animate-spin-slow"></div>
                     <div className="absolute inset-1 bg-white rounded-full"></div>
@@ -243,7 +242,7 @@ export default function About() {
               custom={2}
               variants={fadeInUp}
             >
-              {/* Text Content (Simplified using GlassCard) */}
+              {/* Text Content */}
               <GlassCard className="rounded-3xl p-0" isHoverable={false}>
                 <div className="relative text-gray-700 leading-relaxed space-y-4 text-lg p-8">
                   <p>
@@ -276,7 +275,7 @@ export default function About() {
                 </div>
               </GlassCard>
 
-              {/* Stats (Simplified using GlassCard) */}
+              {/* Stats */}
               <div className="grid grid-cols-3 gap-4">
                 {[
                   {
@@ -314,7 +313,7 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Highlight Cards (Simplified structure but kept hover effect) */}
+          {/* Highlight Cards */}
           <div className="grid md:grid-cols-3 gap-6 mb-20">
             {highlights.map((item, i) => (
               <motion.div
@@ -328,7 +327,7 @@ export default function About() {
               >
                 <GlassCard className="rounded-3xl p-0">
                   <div className="p-6 relative">
-                    {/* Inner Hover/Shimmer Effect */}
+                    {/* Inner Hover Effect */}
                     <div className="absolute inset-0 rounded-3xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                       {/* Gradient background hover effect */}
                       <div
@@ -386,7 +385,7 @@ export default function About() {
             </p>
           </motion.div>
 
-          {/* Non-Scrolling Tech Grid (Simplified using GlassCard) */}
+          {/* Non-Scrolling Tech Grid */}
           <motion.div
             className="relative py-6"
             initial="hidden"
@@ -420,7 +419,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Custom CSS STYLES */}
+      {/* Custom CSS */}
       <style>{`
         /* Keeping custom CSS animations for visual consistency */
         @keyframes blob {
