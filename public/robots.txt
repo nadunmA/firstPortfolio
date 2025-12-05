@@ -1,0 +1,13 @@
+# robots.txt for nadunalgoda.me
+
+# Allow all search engines to crawl everything
+User-agent: *
+Allow: /
+
+# Allow important directories
+Allow: /src/
+Allow: /assets/
+Allow: /projects/
+
+# Sitemap location
+Sitemap: https://nadunalgoda.me/sitemap.xml
