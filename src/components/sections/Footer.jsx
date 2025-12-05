@@ -1,7 +1,10 @@
 import React from "react";
-import { motion } from "framer-motion"; // 1. Framer Motion import කරන්න
+import { motion } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -54,13 +57,50 @@ export default function Footer() {
   ];
 
   const quickLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", path: "/", hash: "#home" },
+    { name: "About", path: "/", hash: "#about" },
+    { name: "Projects", path: "/", hash: "#projects" },
+    { name: "Contact", path: "/", hash: "#footer" },
+    { name: "Certifications", path: "/certifications", hash: null },
   ];
 
-  // 2. Animation Variants
+  const handleNavClick = (e, item) => {
+    e.preventDefault();
+
+    // If it's the certifications page route
+    if (item.path === "/certifications") {
+      navigate("/certifications");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    // If we're not on home page, navigate to home first
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Wait for navigation, then scroll
+      setTimeout(() => {
+        scrollToSection(item.hash);
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      scrollToSection(item.hash);
+    }
+  };
+
+  const scrollToSection = (hash) => {
+    if (hash === "#home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const element = document.querySelector(hash);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - offset;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      }
+    }
+  };
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 50 },
     visible: (custom) => ({
@@ -85,8 +125,11 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 overflow-hidden">
-      {/* Animated Liquid Background - (Static) */}
+    <footer
+      id="footer"
+      className="relative bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 overflow-hidden"
+    >
+      {/* Animated Liquid Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
         <div className="absolute top-20 -right-40 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -105,7 +148,6 @@ export default function Footer() {
             custom={0}
             variants={fadeInUp}
           >
-            {/* Glass Card */}
             <div className="relative">
               <div className="absolute -inset-[1px] rounded-2xl">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white via-blue-100/50 to-purple-100/50"></div>
@@ -155,8 +197,9 @@ export default function Footer() {
                     {quickLinks.map((link) => (
                       <li key={link.name}>
                         <a
-                          href={link.href}
-                          className="text-gray-600 hover:text-gray-900 transition-colors duration-300 flex items-center space-x-2 group"
+                          href={link.hash || link.path}
+                          onClick={(e) => handleNavClick(e, link)}
+                          className="text-gray-600 hover:text-gray-900 transition-colors duration-300 flex items-center space-x-2 group cursor-pointer"
                         >
                           <span className="w-0 group-hover:w-2 h-px bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300"></span>
                           <span className="font-medium">{link.name}</span>
@@ -196,7 +239,7 @@ export default function Footer() {
                         rel="noopener noreferrer"
                         className="relative group"
                         title={social.name}
-                        custom={index + 4} // Icons ටික එකින් එක එන්න
+                        custom={index + 4}
                         variants={popIn}
                       >
                         <div className="absolute -inset-[1px] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
@@ -256,9 +299,7 @@ export default function Footer() {
             </div>
             <div className="relative bg-white/50 backdrop-blur-xl border border-white rounded-xl px-4 py-2 shadow-[0_2px_8px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.9)]">
               <p className="text-gray-600 text-sm text-center md:text-left">
-                © {currentYear} Nadun Algoda. All rights reserved. Built with{" "}
-                <span className="text-red-500">♥</span> using React & Tailwind
-                CSS
+                © {currentYear} Nadun Algoda. All rights reserved.
               </p>
             </div>
           </div>
@@ -279,7 +320,18 @@ export default function Footer() {
             </div>
             <a
               href="#home"
-              className="relative inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-semibold text-base hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl group"
+              onClick={(e) => {
+                e.preventDefault();
+                if (location.pathname !== "/") {
+                  navigate("/");
+                  setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }, 100);
+                } else {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
+              className="relative inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-semibold text-base hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl group cursor-pointer"
             >
               <svg
                 className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300"

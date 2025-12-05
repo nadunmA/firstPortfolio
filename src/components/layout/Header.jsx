@@ -1,30 +1,71 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-export default function Navbar() {
+export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
-    { name: "Home", href: "#home", id: "home" },
-    { name: "About", href: "#about", id: "about" },
-    { name: "Certifications", href: "#certifications", id: "certifications" },
-    { name: "Projects", href: "#projects", id: "projects" },
-    { name: "Contact", href: "#contact", id: "contact" },
+    { name: "Home", path: "/", hash: "#home" },
+    { name: "About", path: "/", hash: "#about" },
+    { name: "Projects", path: "/", hash: "#projects" },
+    { name: "Certifications", path: "/certifications", hash: null },
+    { name: "Contact", path: "/", hash: "#footer" },
   ];
 
-  const handleNavClick = (id) => {
-    setActiveSection(id);
+  const handleNavClick = (e, item) => {
+    e.preventDefault();
     setIsMobileMenuOpen(false);
+
+    // If it's the certifications page route
+    if (item.path === "/certifications") {
+      navigate("/certifications");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    // If we're not on home page, navigate to home first
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Wait for navigation, then scroll
+      setTimeout(() => {
+        scrollToSection(item.hash);
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      scrollToSection(item.hash);
+    }
+  };
+
+  const scrollToSection = (hash) => {
+    if (hash === "#home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const element = document.querySelector(hash);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - offset;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      }
+    }
+  };
+
+  const isActive = (item) => {
+    if (item.path === "/certifications") {
+      return location.pathname === "/certifications";
+    }
+    return location.pathname === "/" && location.hash === item.hash;
   };
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -65,29 +106,31 @@ export default function Navbar() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="flex-shrink-0"
               >
-                <a
-                  href="#home"
-                  onClick={() => handleNavClick("home")}
+                <Link
+                  to="/"
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                   className="text-lg font-bold bg-white text-transparent bg-clip-text hover:scale-105 transition-transform duration-300 drop-shadow-sm"
                 >
                   Nadun Algoda
-                </a>
+                </Link>
               </motion.div>
 
               {/* Desktop Navigation */}
               <div className="hidden md:flex items-center space-x-1">
                 {navItems.map((item, index) => (
                   <motion.a
-                    key={item.id}
-                    href={item.href}
-                    onClick={() => handleNavClick(item.id)}
+                    key={item.name}
+                    href={item.hash || item.path}
+                    onClick={(e) => handleNavClick(e, item)}
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 * index }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
-                      activeSection === item.id
+                      isActive(item)
                         ? "bg-black/80 text-white shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-xl"
                         : "text-white hover:text-black hover:bg-black/10 hover:shadow-[inset_0_1px_0_rgba(0,0,0,0.1)]"
                     }`}
@@ -137,17 +180,17 @@ export default function Navbar() {
                   <div className="space-y-1">
                     {navItems.map((item, index) => (
                       <motion.a
-                        key={item.id}
-                        href={item.href}
-                        onClick={() => handleNavClick(item.id)}
+                        key={item.name}
+                        href={item.hash || item.path}
+                        onClick={(e) => handleNavClick(e, item)}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: 0.05 * index }}
                         whileTap={{ scale: 0.95 }}
                         className={`block px-4 py-3 text-sm font-medium rounded-2xl transition-all duration-300 ${
-                          activeSection === item.id
+                          isActive(item)
                             ? "bg-black/80 text-white shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-xl"
-                            : "text-gray-700 hover:bg-black/10 hover:text-black hover:shadow-[inset_0_1px_0_rgba(0,0,0,0.1)]"
+                            : "text-white hover:bg-black/10 hover:text-white hover:shadow-[inset_0_1px_0_rgba(0,0,0,0.1)]"
                         }`}
                       >
                         {item.name}
@@ -160,8 +203,6 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </motion.nav>
-
-      {/* Spacer */}
     </>
   );
 }

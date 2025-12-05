@@ -1,35 +1,73 @@
 import React from "react";
-import { motion } from "framer-motion"; // 1. Framer Motion import කරන්න
+import { motion } from "framer-motion";
 
 export default function About() {
   const technologies = [
-    { name: "AWS", logo: "https://cdn.simpleicons.org/amazonaws/FF9900" },
+    {
+      name: "AWS",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
+    },
     {
       name: "Python",
-      logo: "https://unpkg.com/simple-icons@latest/icons/python.svg",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg",
     },
-    { name: "MongoDB", logo: "https://cdn.simpleicons.org/mongodb/47A248" },
-    { name: "Express.js", logo: "https://cdn.simpleicons.org/express/000000" },
-    { name: "React", logo: "https://cdn.simpleicons.org/react/61DAFB" },
-    { name: "Node.js", logo: "https://cdn.simpleicons.org/nodedotjs/339933" },
-    { name: "Docker", logo: "https://cdn.simpleicons.org/docker/2496ED" },
+    {
+      name: "MongoDB",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg",
+    },
+    {
+      name: "Express.js",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg",
+    },
+    {
+      name: "React",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg",
+    },
+    {
+      name: "Node.js",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg",
+    },
+    {
+      name: "Docker",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg",
+    },
     {
       name: "Kubernetes",
-      logo: "https://cdn.simpleicons.org/kubernetes/326CE5",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/kubernetes/kubernetes-plain.svg",
     },
-    { name: "Nginx", logo: "https://cdn.simpleicons.org/nginx/009639" },
-    { name: "Jenkins", logo: "https://cdn.simpleicons.org/jenkins/D24939" },
-    { name: "Terraform", logo: "https://cdn.simpleicons.org/terraform/7B42BC" },
-    { name: "Grafana", logo: "https://cdn.simpleicons.org/grafana/F46800" },
-    { name: "Git", logo: "https://cdn.simpleicons.org/git/F05032" },
-    { name: "Linux", logo: "https://cdn.simpleicons.org/linux/FCC624" },
-    { name: "SonarQube", logo: "https://cdn.simpleicons.org/sonarqube/4E9BCD" },
+    {
+      name: "Nginx",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nginx/nginx-original.svg",
+    },
+    {
+      name: "Jenkins",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/jenkins/jenkins-original.svg",
+    },
+    {
+      name: "Terraform",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/terraform/terraform-original.svg",
+    },
+    {
+      name: "Grafana",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/grafana/grafana-original.svg",
+    },
+    {
+      name: "Git",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg",
+    },
+    {
+      name: "Linux",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg",
+    },
+    {
+      name: "SonarQube",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/sonarqube/sonarqube-original.svg",
+    },
     {
       name: "Cloudflare",
-      logo: "https://cdn.simpleicons.org/cloudflare/F38020",
+      logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/cloudflare/cloudflare-original.svg",
     },
   ];
-
   const highlights = [
     {
       icon: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
@@ -51,7 +89,7 @@ export default function About() {
     },
   ];
 
-  // 2. Animation Variants හදාගමු
+  // 2. Animation
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
     visible: (custom) => ({
@@ -59,7 +97,7 @@ export default function About() {
       y: 0,
       transition: {
         duration: 0.8,
-        delay: custom * 0.2, // Stagger effect
+        delay: custom * 0.2,
         ease: "easeOut",
       },
     }),
@@ -70,7 +108,7 @@ export default function About() {
       id="about"
       className="relative min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 py-20 overflow-hidden"
     >
-      {/* Animated Liquid Background - (මේක static තියනවා, content එක විතරක් animate කරමු) */}
+      {/* Animated Liquid Background*/}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
         <div className="absolute top-0 -right-40 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
@@ -100,13 +138,13 @@ export default function About() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start mb-20">
-          {/* Profile Card - Left Side */}
+          {/* Profile Card*/}
           <motion.div
             className="relative"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false }}
-            custom={1} // පොඩි delay එකක්
+            custom={1}
             variants={fadeInUp}
           >
             {/* Liquid glass border effect */}
@@ -179,7 +217,7 @@ export default function About() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false }}
-            custom={2} // Profile එකට වඩා පස්සෙ එන්න
+            custom={2}
             variants={fadeInUp}
           >
             {/* Text Content */}
@@ -262,7 +300,7 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Highlight Cards - Animate One by One */}
+        {/* Highlight Cards*/}
         <div className="grid md:grid-cols-3 gap-6 mb-20">
           {highlights.map((item, i) => (
             <motion.div
@@ -271,7 +309,7 @@ export default function About() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false }}
-              custom={i + 2} // 2, 3, 4 delay එක වැඩි වෙනවා
+              custom={i + 2}
               variants={fadeInUp}
             >
               <div className="absolute -inset-[1px] rounded-3xl">
@@ -332,35 +370,32 @@ export default function About() {
           </p>
         </motion.div>
 
-        {/* Scrolling Ticker (Container eka witharak animate karamu) */}
+        {/* Non-Scrolling Tech Grid*/}
         <motion.div
-          className="relative overflow-hidden py-6"
+          className="relative py-6"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false }}
           custom={2}
           variants={fadeInUp}
         >
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 via-gray-50/50 to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 via-gray-50/50 to-transparent z-10"></div>
-
-          <div className="flex animate-scroll">
-            {[...technologies, ...technologies].map((tech, index) => (
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+            {technologies.map((tech, index) => (
               <div
                 key={`${tech.name}-${index}`}
-                className="relative flex-shrink-0 mx-4"
+                className="relative flex-shrink-0"
               >
                 <div className="absolute -inset-[1px] rounded-xl">
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white via-blue-100/30 to-purple-100/30"></div>
                 </div>
-                <div className="relative px-6 py-4 bg-white/70 backdrop-blur-3xl border border-white rounded-xl flex items-center space-x-3 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] hover:bg-white/80 hover:scale-110 transition-all duration-300 overflow-hidden">
+                <div className="relative px-4 sm:px-6 py-3 sm:py-4 bg-white/70 backdrop-blur-3xl border border-white rounded-xl flex items-center space-x-2 sm:space-x-3 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] hover:bg-white/80 hover:scale-105 transition-all duration-300 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent"></div>
                   <img
                     src={tech.logo}
                     alt={tech.name}
-                    className="relative w-8 h-8 object-contain z-10"
+                    className="relative w-7 h-7 sm:w-8 sm:h-8 object-contain z-10"
                   />
-                  <span className="relative text-gray-800 font-medium text-sm whitespace-nowrap z-10">
+                  <span className="relative text-gray-800 font-medium text-sm sm:text-base whitespace-nowrap z-10">
                     {tech.name}
                   </span>
                 </div>
@@ -371,10 +406,6 @@ export default function About() {
       </div>
 
       <style>{`
-        @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
         @keyframes blob {
           0%, 100% { transform: translate(0, 0) scale(1); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
           25% { transform: translate(30px, -50px) scale(1.1); border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
@@ -388,12 +419,6 @@ export default function About() {
         @keyframes spin-slow {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
-        }
-        .animate-scroll {
-          animation: scroll 30s linear infinite;
-        }
-        .animate-scroll:hover {
-          animation-play-state: paused;
         }
         .animate-blob {
           animation: blob 8s infinite ease-in-out;

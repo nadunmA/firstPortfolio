@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion"; // 1. Import Framer Motion
+import { motion } from "framer-motion";
 
 export default function HeroSection() {
   const [displayText, setDisplayText] = useState("");
@@ -33,14 +33,14 @@ export default function HeroSection() {
       y: 0,
       transition: {
         duration: 0.8,
-        delay: custom * 0.2, // Stagger effect (එකින් එක එන්න)
+        delay: custom * 0.2,
         ease: "easeOut",
       },
     }),
   };
 
   return (
-    <div className="relative w-full h-screen m-0 p-0 overflow-hidden">
+    <div id="home" className="relative w-full h-screen m-0 p-0 overflow-hidden">
       {/* Hero Section */}
       <section className="absolute inset-0 h-screen w-full flex items-center m-0 p-0">
         {/* Background Image */}
@@ -61,7 +61,7 @@ export default function HeroSection() {
               className="mb-4"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false }} // 👈 Scroll කරන හැම වෙලාවෙම play වෙනවා
+              viewport={{ once: false }}
               custom={0}
               variants={fadeInUp}
             >
@@ -113,7 +113,7 @@ export default function HeroSection() {
               custom={3}
               variants={fadeInUp}
             >
-              {/* Badges content... (කලින් තිබ්බ code එකමයි) */}
+              {/* Badges content*/}
               <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/20 rounded-full">
                 <svg
                   className="w-4 h-4 text-white"
