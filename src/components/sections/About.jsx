@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import profile from "../../Images/profile.png";
 
 /**
  * 1. REUSABLE GLASS CARD COMPONENT
@@ -112,7 +113,7 @@ export default function About() {
     },
     {
       icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
-      title: "Cloud Enthusiast",
+      title: "Cloud & DevOps Enthusiast",
       desc: "Exploring cloud platforms and DevOps practices for scalable solutions",
       gradient: "from-purple-400 to-pink-400",
     },
@@ -186,23 +187,13 @@ export default function About() {
               <GlassCard className="rounded-3xl p-0">
                 <div className="p-8">
                   {/* Profile Image */}
-                  <div className="w-36 h-36 mx-auto mb-6 relative">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 rounded-full animate-spin-slow"></div>
-                    <div className="absolute inset-1 bg-white rounded-full"></div>
-                    <div className="absolute inset-2 bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-xl">
-                      <svg
-                        className="w-16 h-16 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        />
-                      </svg>
+                  <div className="w-full max-w-xs mx-auto mb-6 relative">
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                      <img
+                        src={profile}
+                        alt="Nadun Algoda"
+                        className="w-full h-auto object-cover"
+                      />
                     </div>
                   </div>
 
@@ -218,16 +209,14 @@ export default function About() {
 
                   {/* Badges */}
                   <div className="flex flex-wrap justify-center gap-3">
-                    {["MERN Stack", "Cloud Engineering", "DevOps"].map(
-                      (badge, i) => (
-                        <span
-                          key={i}
-                          className="px-5 py-2 bg-white/70 backdrop-blur-xl border border-white/80 rounded-full text-gray-800 text-sm font-medium shadow-md hover:bg-white/90 hover:scale-105 transition-all duration-300"
-                        >
-                          {badge}
-                        </span>
-                      )
-                    )}
+                    {["MERN Stack", "Cloud", "DevOps"].map((badge, i) => (
+                      <span
+                        key={i}
+                        className="px-5 py-2 bg-white/70 backdrop-blur-xl border border-white/80 rounded-full text-gray-800 text-sm font-medium shadow-md hover:bg-white/90 hover:scale-105 transition-all duration-300"
+                      >
+                        {badge}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </GlassCard>

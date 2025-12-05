@@ -175,7 +175,14 @@ export default function HeroSection() {
               custom={4}
               variants={fadeInUp}
             >
-              <button className="group px-8 py-4 bg-white text-black rounded-full font-medium text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white/20">
+              <button
+                onClick={() => {
+                  document.getElementById("about")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
+                className="group px-8 py-4 bg-white text-black rounded-full font-medium text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white/20"
+              >
                 <span className="flex items-center gap-2">
                   Get Started
                   <svg
