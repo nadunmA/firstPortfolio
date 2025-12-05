@@ -124,8 +124,8 @@ export default function Projects() {
       id: 1,
       title: "AI Prompt Library",
       description:
-        "An AI prompt library providing ready-to-use prompts that users can copy and paste into ChatGPT, Grok, Gemini, or other AI models to generate images. This project demonstrates proficiency in building a clean, modern, and highly responsive user interface with an emphasis on performance and search engine optimization (SEO). It's hosted on Cloudflare Pages and utilizes GitHub Actions for continuous deployment.",
-      tags: ["React", "Cloudflare", "GitHub Actions", "Tailwind"],
+        "An AI prompt library providing ready-to-use prompts that users can copy and paste into ChatGPT, Grok, Gemini, or other AI models to generate images. This project demonstrates proficiency in building a clean, modern, and highly responsive user interface with an emphasis on performance and search engine optimization (SEO). It's hosted on GitHub Pages and utilizes Cloudflare for continuous deployment.",
+      tags: ["React", "Cloudflare", "GitHub Pages", "Tailwind"],
       image: solomonImg,
       liveDemo: "https://solomonprompts.site/",
       sourceCode: "https://github.com/nadunmA/solomonAi",
@@ -134,8 +134,8 @@ export default function Projects() {
       id: 2,
       title: "User Management System (OBTS)",
       description:
-        "User Management System for an online bus tracking platform. Handles secure user registration, authentication, and profile management for Admins, Drivers, and Passengers with role-based access control using MERN stack. The backend is containerized using Docker and deployed on an AWS EC2 instance, demonstrating practical skills in cloud deployment and DevOps practices.",
-      tags: ["MERN Stack", "Docker", "AWS EC2", "DevOps", "Tailwind"],
+        "Comprehensive User Management System for an online bus tracking platform built with MERN stack. Handles secure user registration, authentication, and profile management for multiple user roles (Admins, Drivers, and Passengers) with advanced role-based access control. The backend is architected with Node.js and Express.js, implementing JWT token-based authentication, bcrypt password hashing (12 salt rounds), email verification workflows, and password reset functionality. Features include Google OAuth 2.0 integration, driver-specific registration with license verification, profile picture uploads with validation, rate limiting for security, and comprehensive input validation (frontend + backend). The frontend is built with React.js and Tailwind CSS, offering responsive design, real-time form validation, and intuitive user experience across all device sizes.",
+      tags: ["React", "Node JS", "Express", "MongoDB", "Tailwind"],
       image: busTricky,
       liveDemo: "https://github.com/nadunmA", // Placeholder
       sourceCode: "https://github.com/nadunmA/OBTS-User-Management",
