@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion"; // 1. Import Framer Motion
+import { motion } from "framer-motion";
 import solomonImg from "../../Images/solomon.png";
 import busTricky from "../../Images/bus.png";
 
@@ -7,20 +7,20 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
+      title: "Ai Prompt Library",
       description:
-        "A full-stack e-commerce solution built with MERN stack featuring real-time inventory management, payment integration, and admin dashboard.",
-      tags: ["React", "Node.js", "MongoDB", "Stripe"],
+        "An AI prompt library providing ready-to-use prompts that users can copy and paste into ChatGPT, Grok, Gemini, or other AI models to generate images. This project demonstrates proficiency in building a clean, modern, and highly responsive user interface with an emphasis on performance and search engine optimization (SEO). It's hosted on Cloudflare Pages and utilizes GitHub Actions for continuous deployment.", // මෙහි විස්තරය දිග වැඩි කළ හැක
+      tags: ["React", "Cloudflare", "GitHub Pages", "Tailwind"],
       image: solomonImg,
       liveDemo: "https://solomonprompts.site/",
       sourceCode: "https://github.com/nadunmA/solomonAi",
     },
     {
       id: 2,
-      title: "Cloud Infrastructure Automation",
+      title: "User Management System",
       description:
-        "Automated AWS infrastructure deployment using Terraform and CI/CD pipelines with Jenkins. Reduced deployment time by 70%.",
-      tags: ["AWS", "Terraform", "Jenkins", "Docker"],
+        "User Management System for an online bus tracking platform. Handles secure user registration, authentication, and profile management for Admins, Drivers, and Passengers with role-based access control using MERN stack. The backend is containerized using Docker and deployed on an AWS EC2 instance, demonstrating practical skills in cloud deployment and DevOps practices.", // මෙහි විස්තරය දිග වැඩි කළ හැක
+      tags: ["React", "Node JS", "Express", "MongoDB", "Tailwind"],
       image: busTricky,
       liveDemo: "https://github.com/nadunmA",
       sourceCode: "https://github.com/nadunmA/OBTS-User-Management",
@@ -54,12 +54,12 @@ export default function Projects() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section Header (No change) */}
         <motion.div
           className="text-center mb-16"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false }} // Scroll කරන හැම වෙලාවෙම play වෙනවා
+          viewport={{ once: false }}
           custom={0}
           variants={fadeInUp}
         >
@@ -87,27 +87,27 @@ export default function Projects() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false }}
-              custom={index + 1} // 1, 2, 3... delay වෙනවා
+              custom={index + 1}
               variants={fadeInUp}
             >
-              {/* Liquid glass border effect */}
+              {/* Liquid glass border effect (No change) */}
               <div className="absolute -inset-[1px] rounded-3xl">
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white via-blue-100/50 to-purple-100/50"></div>
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-tl from-blue-200/40 via-white/50 to-purple-200/40"></div>
               </div>
 
-              {/* Main White Glass Card */}
-              <div className="relative bg-white/70 backdrop-blur-3xl rounded-3xl border border-white shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] overflow-hidden h-full flex flex-col hover:bg-white/80 transition-all duration-500">
-                {/* Inner white reflection */}
+              {/* Main White Glass Card - Added min-h-[480px] for better visual consistency */}
+              <div className="relative bg-white/70 backdrop-blur-3xl rounded-3xl border border-white shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] overflow-hidden h-full flex flex-col hover:bg-white/80 transition-all duration-500 min-h-[480px]">
+                {/* Inner white reflection (No change) */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent"></div>
 
-                {/* Hover shimmer */}
+                {/* Hover shimmer (No change) */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-700">
                   <div className="absolute top-0 -left-full h-full w-1/2 bg-gradient-to-r from-transparent via-white to-transparent skew-x-12 group-hover:left-full transition-all duration-1000"></div>
                 </div>
 
                 <div className="relative z-10 flex flex-col h-full">
-                  {/* Project Image */}
+                  {/* Project Image (No change) */}
                   <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-t-3xl">
                     <img
                       src={project.image}
@@ -122,11 +122,13 @@ export default function Projects() {
                     <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow leading-relaxed">
+
+                    {/* DESCRIPTION - REMOVED line-clamp-3 */}
+                    <p className="text-gray-600 text-sm mb-4 flex-grow leading-relaxed">
                       {project.description}
                     </p>
 
-                    {/* Tags */}
+                    {/* Tags (No change) */}
                     <div className="flex flex-wrap gap-2 mb-6">
                       {project.tags.map((tag, tagIndex) => (
                         <span
@@ -138,7 +140,7 @@ export default function Projects() {
                       ))}
                     </div>
 
-                    {/* Action Buttons */}
+                    {/* Action Buttons (No change) */}
                     <div className="flex gap-3 mt-auto">
                       {/* Live Demo Button */}
                       <a
@@ -192,7 +194,7 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* View More Button */}
+        {/* View More Button (No change) */}
         <motion.div
           className="text-center"
           initial="hidden"
