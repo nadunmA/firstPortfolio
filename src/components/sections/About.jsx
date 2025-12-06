@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import profile from "../../Images/profile.png";
+import profile from "../../Images/profile.webp";
 
 /**
  * 1. REUSABLE GLASS CARD COMPONENT
