@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import herob from "../../Images/herob.webp";
 
 export default function HeroSection() {
   const [displayText, setDisplayText] = useState("");
@@ -64,7 +65,7 @@ export default function HeroSection() {
         <motion.div
           className="absolute inset-0 w-full h-full bg-cover bg-center"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4')`,
+            backgroundImage: `url(${herob})`,
           }}
           animate={{
             x: mousePosition.x * 20,
