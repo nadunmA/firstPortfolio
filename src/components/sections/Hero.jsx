@@ -4,7 +4,20 @@ import { motion } from "framer-motion";
 export default function HeroSection() {
   const [displayText, setDisplayText] = useState("");
   const [currentRole, setCurrentRole] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const roles = ["Cloud Engineer", "Full-Stack Developer", "DevOps Enthusiast"];
+
+  // Track mouse position for 3D effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   useEffect(() => {
     let index = 0;
@@ -40,21 +53,41 @@ export default function HeroSection() {
   };
 
   return (
-    <div id="home" className="relative w-full h-screen m-0 p-0 overflow-hidden">
+    <div
+      id="home"
+      className="relative w-full h-screen m-0 p-0 overflow-hidden"
+      style={{ perspective: "1000px" }}
+    >
       {/* Hero Section */}
       <section className="absolute inset-0 h-screen w-full flex items-center m-0 p-0">
-        {/* Background Image */}
-        <div
+        {/* Background Image with 3D parallax */}
+        <motion.div
           className="absolute inset-0 w-full h-full bg-cover bg-center"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4')`,
           }}
+          animate={{
+            x: mousePosition.x * 20,
+            y: mousePosition.y * 20,
+            scale: 1.1,
+          }}
+          transition={{ type: "spring", stiffness: 100, damping: 30 }}
         >
-          <div className="absolute inset-0 bg-black/50"></div>
-        </div>
+          <div className="absolute inset-0 bg-black/20"></div>
+        </motion.div>
 
-        {/* Main Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
+        {/* Main Content with 3D tilt */}
+        <motion.div
+          className="relative z-10 max-w-5xl mx-auto px-4 text-center"
+          animate={{
+            rotateY: mousePosition.x * 5,
+            rotateX: -mousePosition.y * 5,
+          }}
+          transition={{ type: "spring", stiffness: 100, damping: 30 }}
+          style={{
+            transformStyle: "preserve-3d",
+          }}
+        >
           <div className="space-y-6">
             {/* Welcome Text */}
             <motion.div
@@ -64,13 +97,14 @@ export default function HeroSection() {
               viewport={{ once: false }}
               custom={0}
               variants={fadeInUp}
+              style={{ transform: "translateZ(20px)" }}
             >
               {/*  <p className="text-sm md:text-base text-gray-400 font-medium tracking-wide uppercase">
                 Welcome to my portfolio
               </p> */}
             </motion.div>
 
-            {/* Main Heading */}
+            {/* Main Heading with depth */}
             <motion.h1
               className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
               initial="hidden"
@@ -78,6 +112,12 @@ export default function HeroSection() {
               viewport={{ once: false }}
               custom={1}
               variants={fadeInUp}
+              style={{
+                transform: "translateZ(40px)",
+                textShadow: `${mousePosition.x * 3}px ${
+                  mousePosition.y * 3
+                }px 30px rgba(0,0,0,0.6)`,
+              }}
             >
               Deploying future-ready solutions,
               <br />
@@ -92,6 +132,7 @@ export default function HeroSection() {
               viewport={{ once: false }}
               custom={2}
               variants={fadeInUp}
+              style={{ transform: "translateZ(30px)" }}
             >
               <p className="text-xl md:text-2xl text-gray-300 font-medium mb-3">
                 {displayText}
@@ -112,9 +153,10 @@ export default function HeroSection() {
               viewport={{ once: false }}
               custom={3}
               variants={fadeInUp}
+              style={{ transform: "translateZ(25px)" }}
             >
               {/* Badges content*/}
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/20 rounded-full">
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/20 rounded-full backdrop-blur-sm hover:bg-white/10 transition-all duration-300 hover:scale-110">
                 <svg
                   className="w-4 h-4 text-white"
                   fill="none"
@@ -132,7 +174,7 @@ export default function HeroSection() {
                   Full Stack
                 </span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/20 rounded-full">
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/20 rounded-full backdrop-blur-sm hover:bg-white/10 transition-all duration-300 hover:scale-110">
                 <svg
                   className="w-4 h-4 text-white"
                   fill="none"
@@ -148,7 +190,7 @@ export default function HeroSection() {
                 </svg>
                 <span className="text-white text-sm font-medium">Cloud</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/20 rounded-full">
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/20 rounded-full backdrop-blur-sm hover:bg-white/10 transition-all duration-300 hover:scale-110">
                 <svg
                   className="w-4 h-4 text-white"
                   fill="none"
@@ -174,6 +216,7 @@ export default function HeroSection() {
               viewport={{ once: false }}
               custom={4}
               variants={fadeInUp}
+              style={{ transform: "translateZ(35px)" }}
             >
               <button
                 onClick={() => {
@@ -229,13 +272,14 @@ export default function HeroSection() {
               viewport={{ once: false }}
               custom={5}
               variants={fadeInUp}
+              style={{ transform: "translateZ(20px)" }}
             >
               {/* Icons content*/}
               <a
                 href="https://github.com/nadunmA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center bg-white/5 border border-white/20 rounded-full hover:bg-white hover:border-white transition-all duration-300 hover:scale-110 group"
+                className="w-12 h-12 flex items-center justify-center bg-white/5 border border-white/20 rounded-full hover:bg-white hover:border-white transition-all duration-300 hover:scale-110 group backdrop-blur-sm"
               >
                 <svg
                   className="w-5 h-5 text-white group-hover:text-black transition-colors"
@@ -250,7 +294,7 @@ export default function HeroSection() {
                 href="https://www.linkedin.com/in/nadunal21/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center bg-white/5 border border-white/20 rounded-full hover:bg-white hover:border-white transition-all duration-300 hover:scale-110 group"
+                className="w-12 h-12 flex items-center justify-center bg-white/5 border border-white/20 rounded-full hover:bg-white hover:border-white transition-all duration-300 hover:scale-110 group backdrop-blur-sm"
               >
                 <svg
                   className="w-5 h-5 text-white group-hover:text-black transition-colors"
@@ -262,7 +306,7 @@ export default function HeroSection() {
               </a>
               <a
                 href="mailto:your@email.com"
-                className="w-12 h-12 flex items-center justify-center bg-white/5 border border-white/20 rounded-full hover:bg-white hover:border-white transition-all duration-300 hover:scale-110 group"
+                className="w-12 h-12 flex items-center justify-center bg-white/5 border border-white/20 rounded-full hover:bg-white hover:border-white transition-all duration-300 hover:scale-110 group backdrop-blur-sm"
               >
                 <svg
                   className="w-5 h-5 text-white group-hover:text-black transition-colors"
@@ -280,7 +324,7 @@ export default function HeroSection() {
               </a>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Scroll Indicator*/}
         <motion.div
