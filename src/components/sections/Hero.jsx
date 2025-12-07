@@ -6,7 +6,7 @@ export default function HeroSection() {
   const [displayText, setDisplayText] = useState("");
   const [currentRole, setCurrentRole] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const roles = ["Cloud Engineer", "Full-Stack Developer", "DevOps Enthusiast"];
+  const roles = ["Cloud", "Full-Stack Developer", "DevOps Enthusiast"];
 
   // Track mouse position for 3D effect
   useEffect(() => {
