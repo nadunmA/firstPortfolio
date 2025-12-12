@@ -62,20 +62,17 @@ export default function HeroSection() {
       {/* Hero Section */}
       <section className="absolute inset-0 h-screen w-full flex items-center m-0 p-0">
         {/* Background Image with 3D parallax */}
-        <motion.div
-          className="absolute inset-0 w-full h-full bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${herob})`,
-          }}
+        <motion.img
+          src={herob}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover"
           animate={{
             x: mousePosition.x * 20,
             y: mousePosition.y * 20,
             scale: 1.1,
           }}
-          transition={{ type: "spring", stiffness: 100, damping: 30 }}
-        >
-          <div className="absolute inset-0 bg-black/20"></div>
-        </motion.div>
+        />
+        <div className="absolute inset-0 bg-black/20"></div>
 
         {/* Main Content with 3D tilt */}
         <motion.div
