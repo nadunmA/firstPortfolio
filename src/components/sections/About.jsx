@@ -132,7 +132,7 @@ export default function About() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.7,
         delay: custom * 0.2,
         ease: "easeOut",
       },
@@ -363,7 +363,7 @@ export default function About() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false }}
-            custom={6}
+            custom={2}
             variants={fadeInUp}
           >
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
@@ -380,7 +380,7 @@ export default function About() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false }}
-            custom={7}
+            custom={3}
             variants={fadeInUp}
           >
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
